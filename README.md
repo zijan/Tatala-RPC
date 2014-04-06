@@ -86,7 +86,7 @@ That is everything from server to client codes and configuration for a full RPC.
 
 There are more examples on tutorial section.
 
-https://github.com/zijan/Tatala/wiki/Tatala-Tutorial
+https://github.com/zijan/Tatala/wiki/Tatala-Tutorial#tutorial
 
 ## Support Type
 Supported parameter and return type table
