@@ -6,9 +6,8 @@
 	<property name="dist-dir" location="dist" />
 
 	<target name="clean">
-		<delete>
-			<fileset dir="${obj-dir}" includes="**/*.*" />
-		</delete>
+		<delete dir="${obj-dir}" />
+		<mkdir dir="${obj-dir}" /> 
 	</target>
 
 	<target name="compile" depends="clean">
