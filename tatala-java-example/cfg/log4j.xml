@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+  
+  <!-- ================================================================= -->
+  <!--                     a rolling file appender                       -->
+  <!-- ================================================================= -->
+  
+  <appender name="file.log" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="log.log" />
+    <param name="Append" value="false" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d [%t] %p - %m%n" />
+    </layout>
+  </appender>
+  
+  <!-- ================================================================= -->
+  <!--                       a console appender                          -->
+  <!--     debug can be turned off by setting level of root to "off"     -->
+  <!-- ================================================================= -->
+  
+  <appender name="console.log" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{HH:mm:ss} %p [%c{1}:%L] - %m%n" />
+    </layout>
+  </appender>
+
+
+  <logger name="com.qileyuan"> 
+  	<level value="debug" />
+    <appender-ref ref="console.log" />
+    <!--<appender-ref ref="file.log" />-->
+  </logger>
+
+</log4j:configuration>
