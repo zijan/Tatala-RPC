@@ -5,6 +5,8 @@ Tatala is an easy-to-use RPC middleware, cross language and cross platform, that
 
 Right now, there are Tatala-Java (client & server) and Tatala-client-csharp available.
 
+https://github.com/zijan/Tatala/wiki/Tatala-中文教程
+
 ## Features
 * Easy-to-use quickly develop and setup a network component
 * Cross language and platform
