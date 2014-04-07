@@ -88,6 +88,8 @@ There are more examples on tutorial section.
 
 https://github.com/zijan/Tatala/wiki/Tatala-Tutorial#tutorial
 
+https://github.com/zijan/Tatala/wiki/Tatala-中文教程
+
 ## Support Type
 Supported parameter and return type table
 
