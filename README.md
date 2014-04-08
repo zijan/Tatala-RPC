@@ -16,6 +16,7 @@ https://github.com/zijan/Tatala/wiki/Tatala-中文教程
 * Support multi thread on both client and server side
 * Support synchronous or asynchronous method call
 * Support compression for big content
+* Support Server push message to client
 * Can use for cross-language RPC, high performance cache server, distributed message service, MMO game server……
 
 ## Get Started
