@@ -128,5 +128,7 @@ Third part libs include XSteam and Log4j.
 This library is distributed under Apache License Version 2.0
 ## Contact
 jimtang@hotmail.ca
+
 QQ: 37287685
+
 Skype: zhijiantang@hotmail.com
