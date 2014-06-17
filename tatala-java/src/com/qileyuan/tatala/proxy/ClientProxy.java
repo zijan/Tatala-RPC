@@ -143,7 +143,7 @@ public class ClientProxy implements InvocationHandler {
 				
 			} else if (Serializable.class.isAssignableFrom(paramClass)
 					|| Collection.class.isAssignableFrom(paramClass)
-					|| Map.class.isAssignableFrom(returnType)) {
+					|| Map.class.isAssignableFrom(paramClass)) {
 				to.putSerializable((Serializable) args[i]);
 			}
 		}
