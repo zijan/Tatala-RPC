@@ -3,8 +3,10 @@ package com.qileyuan.tatala.example.client;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -115,6 +117,16 @@ public class EasyClient {
 			}
 			accountMap = manager.getAccountMap(accountMap);
 			log.debug("accountMap: "+accountMap);
+			
+			//set parameter, set return testing
+			Set<TestAccount> accountSet = new HashSet<TestAccount>();
+			for(int i=0; i<3; i++){
+				account = new TestAccount();
+				account.setId(i);
+				accountSet.add(account);
+			}
+			accountSet = manager.getAccountSet(accountSet);
+			log.debug("accountSet: "+accountSet);
 			
 			//more than one object parameter, object return testing
 			TestAccount accountt = new TestAccount();

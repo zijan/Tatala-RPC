@@ -3,8 +3,10 @@ package com.qileyuan.tatala.example.service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -42,10 +44,6 @@ public class TestManagerImpl implements TestManager{
 		return returnAccount;
 	}
 	
-	public List<TestAccount> getAccountList(ArrayList<TestAccount> accountList){
-		return getAccountList((List<TestAccount>)accountList);
-	}
-	
 	public List<TestAccount> getAccountList(List<TestAccount> accountList){
 		List<TestAccount> retAccountList = new ArrayList<TestAccount>();
 		for (TestAccount account : accountList) {
@@ -56,10 +54,6 @@ public class TestManagerImpl implements TestManager{
 			retAccountList.add(account2);
 		}
 		return retAccountList;
-	}
-	
-	public Map<String, TestAccount> getAccountMap(HashMap<String, TestAccount> accountMap){
-		return getAccountMap((Map<String, TestAccount>)accountMap);
 	}
 	
 	public Map<String, TestAccount> getAccountMap(Map<String, TestAccount> accountMap){
@@ -74,6 +68,18 @@ public class TestManagerImpl implements TestManager{
 		return retAccountMap;
 	}
 
+	public Set<TestAccount> getAccountSet(Set<TestAccount> accountSet){
+		Set<TestAccount> retAccountSet = new HashSet<TestAccount>();
+		for (TestAccount account : accountSet) {
+			TestAccount account2 = new TestAccount();
+			account2.setId(account.getId());
+			account2.setName("Jim");
+			account2.setAddress("North York");
+			retAccountSet.add(account2);
+		}
+		return retAccountSet;
+	}
+	
 	public AllTypeBean getAllTypeBean(boolean aboolean, byte abyte,
 			short ashort, char achar, int aint, long along, float afloat,
 			double adouble, Date adate, String astring) {

@@ -3,6 +3,9 @@ package com.qileyuan.tatala.proxy;
 import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -86,6 +89,16 @@ public class ServerProxy extends DefaultProxy{
 				} else if (paramType.equals(String[].class)) {
 					clazzs[i] = String[].class;
 					objects[i] = to.getStringArray();
+					
+				} else if (List.class.isAssignableFrom(paramType)) {
+					clazzs[i] = List.class;
+					objects[i] = to.getSerializable();
+				} else if (Map.class.isAssignableFrom(paramType)) {
+					clazzs[i] = Map.class;
+					objects[i] = to.getSerializable();
+				} else if (Set.class.isAssignableFrom(paramType)) {
+					clazzs[i] = Set.class;
+					objects[i] = to.getSerializable();
 					
 				} else if (Serializable.class.isAssignableFrom(paramType)) {
 					clazzs[i] = Class.forName(paramType.getName());
