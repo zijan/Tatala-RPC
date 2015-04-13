@@ -31,6 +31,12 @@ public class TestManagerImpl implements TestManager{
 	public void doSomething(){
 	}
 	
+	@Override
+	public void callServer(int Id) {
+		log.debug("Id: "+Id);
+		throw new TestReturnException("Call Server error");
+	}
+	
 	public TestAccount getAccount(TestAccount account){
 		account.setAddress("Toronto");
 		return account;

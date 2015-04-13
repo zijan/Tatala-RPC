@@ -103,12 +103,7 @@ public class ShortClientSession{
 
 	private Object receive(Socket client, TransferObject to) throws IOException, DataFormatException, SocketExecuteException {
 		Object resultObject = null;
-		
-		//if return void, don't call socket receive
-		if(to.getReturnType() == TransferObject.DATATYPE_VOID){
-			return resultObject;
-		}
-		
+
 		InputStream is = client.getInputStream();
 		// in
 		int compressFlag = is.read();

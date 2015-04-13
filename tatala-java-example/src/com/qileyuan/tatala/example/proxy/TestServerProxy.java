@@ -43,6 +43,12 @@ public class TestServerProxy {
 	public void doSomething(TransferObject baseto) {
 		manager.doSomething();
 	}
+	
+	public void callServer(TransferObject baseto) {
+		StandardTransferObject to = (StandardTransferObject)baseto;
+		int Id = to.getInt("Id");
+		manager.callServer(Id);
+	}
 
 	public TestAccountWrapper getAccount(TransferObject baseto) {
 		StandardTransferObject to = (StandardTransferObject)baseto;

@@ -32,6 +32,8 @@ public class TestClient implements Runnable{
 	static Logger log = Logger.getLogger(TestClient.class);
 	static TestClientProxy manager = new TestClientProxy();
 	
+	static int sId = 1;
+	
 	public TestClient() {
 	}
 	
@@ -64,14 +66,13 @@ public class TestClient implements Runnable{
 			
 			//no parameter, void return testing
 			manager.doSomething();
-			
+
 			//object parameter, object return testing
 			TestAccount account = new TestAccount();
 			account.setId(1000);
 			account.setName("JimT");
 			account = manager.getAccount(account);
 			log.debug(account);
-			
 			
 			//all primitive type parameter, object return testing
 			AllTypeBean allTypeBean = manager.getAllTypeBean(true, (byte)1, (short)2, 'T', 3, 
@@ -123,6 +124,17 @@ public class TestClient implements Runnable{
 			accountt2.setAddress("Toronto");
 			account = manager.getAccount2(accountt, accountt2);
 			log.debug(account);
+			
+			//int parameter, void return testing, Tatala return exception
+			log.debug("callServer sId: " + sId);
+			manager.callServer(sId++);
+			
+			/*
+			synchronized (manager) {
+				log.debug("callServer sId: " + sId);
+				manager.callServer(sId++);
+			}
+			*/
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -68,6 +68,17 @@ public class TestClientProxy {
 
 		ServerExecutor.execute(to);
 	}
+	
+	public void callServer(int Id) {
+		StandardTransferObject to = transferObjectFactory.createTransferObject();
+
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeMethod("callServer");
+		to.putInt("Id	", Id);
+		to.registerReturnType(TransferObject.DATATYPE_VOID);
+
+		ServerExecutor.execute(to);
+	}
 
 	public TestAccount getAccount(TestAccount account) throws Exception {
 		StandardTransferObject to = transferObjectFactory.createTransferObject();

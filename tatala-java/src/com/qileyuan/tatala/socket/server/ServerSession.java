@@ -2,6 +2,7 @@ package com.qileyuan.tatala.socket.server;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
@@ -19,6 +20,7 @@ import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
 import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.TatalaReturnException;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.NetworkUtil;
 import com.qileyuan.tatala.socket.util.TransferUtil;
@@ -174,14 +176,24 @@ public class ServerSession {
 
 			Object returnObj = execute(to);
 			send(to, returnObj);
-        }catch (SocketExecuteException see) {
+			
+        } catch (TatalaReturnException tre) {
+			log.error("Tatala Return Exception: Callee Class and Method: [" + to.getCalleeClass() + "."+ to.getCalleeMethod() + "] e: " + tre, tre);
+			try {
+				to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
+				send(to, tre);
+			} catch (Exception e) {
+				close();
+			} 
+			
+		} catch (SocketExecuteException see) {
         	log.error("Callee Class and Method: [" + to.getCalleeClass() + "."+ to.getCalleeMethod() + "]");
         	try {
 				send(to, null);
 			} catch (Exception e) {
 				close();
 			} 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			log.error("Callee Class and Method: [" + to.getCalleeClass() + "."+ to.getCalleeMethod() + "]");
 			log.error("Handle Receive Data error: " + e, e);
 			close();
@@ -204,14 +216,14 @@ public class ServerSession {
 				if(defaultProxy != null){
 					retobj = defaultProxy.execute(to);
 				}
-			}else{
+			} else {
 				Class<?> calleeClass = null;
 				Object calleeObject = null;
 				
 				if(calleeClassCache.containsKey(calleeClassName)){
 					calleeClass = calleeClassCache.get(calleeClassName);
 					calleeObject = calleeObjectCache.get(calleeClassName);
-				}else{
+				} else {
 					calleeClass = Class.forName(calleeClassName);
 					calleeObject = calleeClass.newInstance();
 					
@@ -226,6 +238,15 @@ public class ServerSession {
 				Method meth = calleeClass.getMethod(calleeMethod, TransferObject.class);
 				retobj = meth.invoke(calleeObject, to);
 			}
+		} catch (InvocationTargetException ite) {
+			if(ite.getCause() instanceof TatalaReturnException){
+				TatalaReturnException tre = (TatalaReturnException)ite.getCause();
+				throw tre;
+			} else {
+				log.error("Server execute error e: " + ite, ite);
+				throw new SocketExecuteException("Server execute error e: " + ite.getMessage());
+			}
+
 		} catch (Exception e) {
 			log.error("Server execute error e: " + e, e);
 			throw new SocketExecuteException("Server execute error e: " + e.getMessage());
@@ -235,11 +256,6 @@ public class ServerSession {
 	}
 
 	private void send(TransferObject to, Object returnObj) throws IOException, InterruptedException, ExecutionException{
-		//if return void, don't call socket send
-		if(to.getReturnType() == TransferObject.DATATYPE_VOID){
-			return;
-		}
-
 		byte[] sendData = TransferUtil.returnObjectToByteArray(to, returnObj);
 		ByteBuffer byteBuffer = ByteBuffer.wrap(sendData);
 		

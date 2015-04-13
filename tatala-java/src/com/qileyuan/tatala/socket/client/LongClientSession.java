@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
 import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.TatalaReturnException;
 import com.qileyuan.tatala.socket.to.StandardTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.TransferUtil;
@@ -69,6 +70,14 @@ public class LongClientSession{
 			}
 			send(to);
 			resultObject = receive(to);
+			
+			if(resultObject instanceof TatalaReturnException){
+				throw (TatalaReturnException)resultObject;
+			}
+			
+		} catch (TatalaReturnException tre) {
+			log.error("Tatala Return Exception: Callee Class and Method: [" + calleeClass + "." + calleeMethod + "]");
+			throw tre;
 		} catch (BindException be) {
 			log.error("Connection error: " + be.getMessage());
 			log.error("Callee Class and Method: [" + calleeClass + "." + calleeMethod + "]");
@@ -121,12 +130,7 @@ public class LongClientSession{
 	
 	private Object receive(TransferObject to) throws InterruptedException, DataFormatException, SocketExecuteException  {
 		Object resultObject = null;
-		
-		//if return void, don't call socket receive
-		if(to.getReturnType() == TransferObject.DATATYPE_VOID){
-			return resultObject;
-		}
-		
+
 		//if receiveQueue is empty, wait a while, until server response come 
 		byte[] receiveData = receiveQueue.poll(timeout, TimeUnit.MILLISECONDS);
 

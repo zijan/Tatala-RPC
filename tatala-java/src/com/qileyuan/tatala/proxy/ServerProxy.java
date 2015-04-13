@@ -1,6 +1,7 @@
 package com.qileyuan.tatala.proxy;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.qileyuan.tatala.socket.TatalaReturnException;
 import com.qileyuan.tatala.socket.to.NewTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
@@ -108,6 +110,16 @@ public class ServerProxy extends DefaultProxy{
 			
 			Method meth = clazz.getMethod(implMethod, clazzs);
 			retobj = meth.invoke(instance, objects);
+			
+		} catch (InvocationTargetException ite) {
+			if(ite.getCause() instanceof TatalaReturnException){
+				TatalaReturnException tre = (TatalaReturnException)ite.getCause();
+				throw tre;
+			} else {
+				log.error("ServerProxy.execute e: " + ite);
+				ite.printStackTrace();
+			}
+			
 		} catch (Exception e) {
 			log.error("ServerProxy.execute e: " + e);
 			e.printStackTrace();

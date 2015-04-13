@@ -17,6 +17,7 @@ import com.qileyuan.tatala.example.model.TestAccount;
 public interface TestManager {
 	public String sayHello(int Id, String name);
 	public void doSomething();
+	public void callServer(int Id);
 	public TestAccount getAccount(TestAccount account);
 	public TestAccount getAccount2(TestAccount account, TestAccount account2);
 	public List<TestAccount> getAccountList(List<TestAccount> accountList);
