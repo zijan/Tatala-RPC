@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0BB5AF5A-C6C7-4BF1-9DCA-336CB3E2FA20}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>tatala_client_csharp</RootNamespace>
+    <AssemblyName>tatala-client-csharp</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="src\Example\Tatala\client\ChatRoomClient.cs" />
+    <Compile Include="src\Example\Tatala\client\TestClient.cs" />
+    <Compile Include="src\Example\Tatala\model\AllTypeBean.cs" />
+    <Compile Include="src\Example\Tatala\model\TestAccount.cs" />
+    <Compile Include="src\Example\Tatala\proxy\ChatRoomClientDefaultProxy.cs" />
+    <Compile Include="src\Example\Tatala\proxy\ChatRoomClientProxy.cs" />
+    <Compile Include="src\Example\Tatala\proxy\TestClientProxy.cs" />
+    <Compile Include="src\Example\Tatala\proxy\wrapper\AllTypeBeanWrapper.cs" />
+    <Compile Include="src\Example\Tatala\proxy\wrapper\TestAccountWrapper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\executor\LocalTarget.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\executor\ServerExecutor.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\executor\ServerTarget.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\executor\SocketServerTarget.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\proxy\DefaultProxy.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\client\Future.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\client\LongClientSession.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\client\ShortClientSession.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\client\SocketConnection.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\client\SocketController.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\io\TransferInputStream.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\io\TransferOutputStream.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\BooleanMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\ByteArrayMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\ByteMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\CharMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\DateMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\DoubleArrayMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\DoubleMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\FloatArrayMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\FloatMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\IntArrayMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\IntMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\LongArrayMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\LongMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\ShortMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\StringArrayMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\StringMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\helper\WrapperMapHelper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\NewTransferObject.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\StandardTransferObject.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\TransferObject.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\TransferObjectFactory.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\to\TransferObjectWrapper.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\socket\util\TransferUtil.cs" />
+    <Compile Include="src\QiLeYuan\Tatala\util\BlockingQueue.cs" />
+    <Compile Include="src\QiLeYuan\Tools\debug\BaseDebug.cs" />
+    <Compile Include="src\QiLeYuan\Tools\debug\ConsoleDebug.cs" />
+    <Compile Include="src\QiLeYuan\Tools\debug\Logging.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Checksums\Adler32.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Checksums\CRC32.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Checksums\IChecksum.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Checksums\StrangeCRC.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Encryption\PkzipClassic.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Encryption\ZipAESStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Encryption\ZipAESTransform.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Main.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\SharpZipBaseException.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\Deflater.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\DeflaterConstants.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\DeflaterEngine.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\DeflaterHuffman.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\DeflaterPending.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\Inflater.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\InflaterDynHeader.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\InflaterHuffmanTree.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\PendingBuffer.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\Streams\DeflaterOutputStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\Streams\InflaterInputStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\Streams\OutputWindow.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\Compression\Streams\StreamManipulator.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\ZipConstants.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\ZipEntry.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\ZipException.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\ZipExtraData.cs" />
+    <Compile Include="src\QiLeYuan\Tools\ICSharpCode\SharpZipLib\Zip\ZipHelperStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\ConditionalConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\ConversionException.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\ArrayConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\BooleanConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\ByteConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\CDataConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\CharConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\Complex\StringBuilderConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\DateTimeConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\DecimalConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\DoubleConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\EnumConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\FloatConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\GenericListConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\GuidConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\IntConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\LongConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\MethodInfoConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\NoopConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\NullConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\ObjectConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\PointerConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\ShortConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\StringConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\TargetForceLoader.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\TimeSpanConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\Converters\TypeConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\DynamicInstanceBuilder.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\FileXStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\IConverter.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\IdFields.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\IMarshalContext.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\IXStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\MarshalContext.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\NullType.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\ReferenceComparer.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\XStream.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\XStreamBase.cs" />
+    <Compile Include="src\QiLeYuan\Tools\Xstream\Core\XStreamMarshaller.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

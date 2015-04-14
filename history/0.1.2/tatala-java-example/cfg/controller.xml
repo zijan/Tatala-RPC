@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections>
+  <connection>
+    <hostIp>127.0.0.1</hostIp>
+    <hostPort>10001</hostPort>
+    <timeout>5000</timeout>
+    <retryTime>3</retryTime>
+    <name>test1</name>
+  </connection>
+  <connection>
+    <hostIp>127.0.0.1</hostIp>
+    <hostPort>10002</hostPort>
+    <timeout>5000</timeout>
+    <retryTime>3</retryTime>
+    <name>test2</name>
+  </connection>
+</connections>
+

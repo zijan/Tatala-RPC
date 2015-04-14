@@ -1,5 +1,21 @@
 # TATALA
 
+## Coming version 0.2.x
+#### Features
+* Code refactor
+* More easy to code
+* Integrate jetty, support RESTfull call
+* Support protobuf
+
+## Version 0.1.2 Release Note
+#### Features
+* Add set on EasyClient
+* Add TatalaReturnException, so let client be able to rollback transaction
+
+#### Bugs Fix
+* fix bugs for List and Map on ServerProxy.java
+* fix for multiple thread, void return method, may disorder on server side
+
 ## Overview
 Tatala is an easy-to-use RPC middleware, cross language and cross platform, that convert method signature (include callee class name, target method name, the number of its arguments and server return) into byte array, communicate with client and server base on socket.
 
