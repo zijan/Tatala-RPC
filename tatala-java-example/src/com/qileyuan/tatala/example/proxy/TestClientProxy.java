@@ -74,7 +74,7 @@ public class TestClientProxy {
 
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("callServer");
-		to.putInt("Id	", Id);
+		to.putInt("Id", Id);
 		to.registerReturnType(TransferObject.DATATYPE_VOID);
 
 		ServerExecutor.execute(to);
