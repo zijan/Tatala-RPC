@@ -1,0 +1,30 @@
+<project default="all">
+	<property name="module-name" value="tatala-java-example" />
+	<property name="obj-dir" location="bin" />
+	<property name="lib-dir" location="lib" />
+	<property name="src-dir" location="src" />
+	<property name="dist-dir" location="dist" />
+
+	<target name="clean">
+		<delete dir="${obj-dir}" />
+		<mkdir dir="${obj-dir}" /> 
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${src-dir}" destdir="${obj-dir}" debug="on">
+			<classpath>
+				<pathelement path="${classpath}" />
+				<fileset dir="${lib-dir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${dist-dir}/${module-name}.jar" basedir="${obj-dir}" />
+	</target>
+
+	<target name="all" depends="jar" />
+
+</project>
