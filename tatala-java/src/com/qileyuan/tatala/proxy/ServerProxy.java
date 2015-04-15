@@ -10,7 +10,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.socket.TatalaReturnException;
+import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
 import com.qileyuan.tatala.socket.to.NewTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
@@ -112,8 +112,8 @@ public class ServerProxy extends DefaultProxy{
 			retobj = meth.invoke(instance, objects);
 			
 		} catch (InvocationTargetException ite) {
-			if(ite.getCause() instanceof TatalaReturnException){
-				TatalaReturnException tre = (TatalaReturnException)ite.getCause();
+			if(ite.getCause() instanceof TatalaRollbackException){
+				TatalaRollbackException tre = (TatalaRollbackException)ite.getCause();
 				throw tre;
 			} else {
 				log.error("ServerProxy.execute e: " + ite);

@@ -13,7 +13,7 @@ import java.util.zip.Inflater;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.TransferUtil;
 

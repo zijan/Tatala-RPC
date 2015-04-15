@@ -1,4 +1,4 @@
-package com.qileyuan.tatala.socket;
+package com.qileyuan.tatala.socket.exception;
 
 public class SocketExecuteException extends Exception {
 	

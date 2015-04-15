@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.io.TransferInputStream;
 import com.qileyuan.tatala.socket.io.TransferOutputStream;
 import com.qileyuan.tatala.socket.util.TransferUtil;

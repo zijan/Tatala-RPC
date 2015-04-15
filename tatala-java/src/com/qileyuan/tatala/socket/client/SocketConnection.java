@@ -20,15 +20,19 @@ public class SocketConnection {
 
 	static Logger log = Logger.getLogger(SocketConnection.class);
 
-	private String hostIp;
-	private int hostPort;
+	private String ip;
+	private int port;
 	private int timeout;
-	private int retryTime;
-	private String name;
 
 	private ShortClientSession shortClientSession;
 	private LongClientSession longClientSession;
 	private final ReentrantLock lock = new ReentrantLock();
+	
+	public SocketConnection(String ip, int port, int timeout){
+		this.ip = ip;
+		this.port = port;
+		this.timeout = timeout;
+	}
 	
 	/**
 	 * This method handles all outgoing and incoming data.
@@ -41,7 +45,7 @@ public class SocketConnection {
 			lock.lock();
 			try {
 				if(longClientSession == null){
-					longClientSession = new LongClientSession(hostIp, hostPort, timeout, retryTime);
+					longClientSession = new LongClientSession(ip, port, timeout, 0);
 				}
 				return longClientSession.start(to);
 			} finally {
@@ -49,26 +53,26 @@ public class SocketConnection {
 			}
 		}else{
 			if(shortClientSession == null){
-				shortClientSession = new ShortClientSession(hostIp, hostPort, timeout, retryTime);
+				shortClientSession = new ShortClientSession(ip, port, timeout, 0);
 			}
 			return shortClientSession.start(to);
 		}
 	}
-	
-	public String getHostIp() {
-		return hostIp;
+
+	public String getIp() {
+		return ip;
 	}
 
-	public void setHostIp(String hostIp) {
-		this.hostIp = hostIp;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
-	public int getHostPort() {
-		return hostPort;
+	public int getPort() {
+		return port;
 	}
 
-	public void setHostPort(int hostPort) {
-		this.hostPort = hostPort;
+	public void setPort(int port) {
+		this.port = port;
 	}
 
 	public int getTimeout() {
@@ -77,38 +81,6 @@ public class SocketConnection {
 
 	public void setTimeout(int timeout) {
 		this.timeout = timeout;
-	}
-
-	public int getRetryTime() {
-		return retryTime;
-	}
-
-	public void setRetryTime(int retryTime) {
-		this.retryTime = retryTime;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String toString() {
-		final String TAB = "    ";
-
-		StringBuilder retValue = new StringBuilder();
-
-		retValue.append("SocketConnection ( ").append(super.toString())
-				.append(TAB).append("hostIp = ").append(this.hostIp)
-				.append(TAB).append("hostPort = ").append(this.hostPort)
-				.append(TAB).append("timeout = ").append(this.timeout)
-				.append(TAB).append("retryTime = ").append(this.retryTime)
-				.append(TAB).append("name = ").append(this.name).append(TAB)
-				.append(" )");
-
-		return retValue.toString();
 	}
 
 }

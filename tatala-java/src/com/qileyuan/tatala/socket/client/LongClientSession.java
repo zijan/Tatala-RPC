@@ -19,8 +19,8 @@ import java.util.zip.DataFormatException;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.SocketExecuteException;
-import com.qileyuan.tatala.socket.TatalaReturnException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
 import com.qileyuan.tatala.socket.to.StandardTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.TransferUtil;
@@ -71,11 +71,11 @@ public class LongClientSession{
 			send(to);
 			resultObject = receive(to);
 			
-			if(resultObject instanceof TatalaReturnException){
-				throw (TatalaReturnException)resultObject;
+			if(resultObject instanceof TatalaRollbackException){
+				throw (TatalaRollbackException)resultObject;
 			}
 			
-		} catch (TatalaReturnException tre) {
+		} catch (TatalaRollbackException tre) {
 			log.error("Tatala Return Exception: Callee Class and Method: [" + calleeClass + "." + calleeMethod + "]");
 			throw tre;
 		} catch (BindException be) {

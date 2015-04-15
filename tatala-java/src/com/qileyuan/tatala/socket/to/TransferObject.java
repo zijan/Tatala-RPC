@@ -7,7 +7,8 @@ import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.client.SocketConnection;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.io.TransferInputStream;
 import com.qileyuan.tatala.socket.io.TransferOutputStream;
 import com.qileyuan.tatala.socket.util.TransferUtil;
@@ -54,7 +55,7 @@ public abstract class TransferObject {
 	public static final String DEFAULT_PROXY = "DefaultProxy";
 	public static final String DEFAULT_METHOD = "execute";
 
-	protected String connectionName;
+	protected SocketConnection connection;
 	
 	protected String calleeClass = DEFAULT_PROXY;
 	protected String calleeMethod = DEFAULT_METHOD;
@@ -93,12 +94,12 @@ public abstract class TransferObject {
 		this.calleeMethod = calleeMethod;
 	}
 	
-	public String getConnectionName() {
-		return connectionName;
+	public SocketConnection getConnection() {
+		return connection;
 	}
 
-	public void setConnectionName(String connectionName) {
-		this.connectionName = connectionName;
+	public void setConnection(SocketConnection connection) {
+		this.connection = connection;
 	}
 
 	public boolean isAsynchronous() {

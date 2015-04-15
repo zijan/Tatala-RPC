@@ -19,8 +19,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.SocketExecuteException;
-import com.qileyuan.tatala.socket.TatalaReturnException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.NetworkUtil;
 import com.qileyuan.tatala.socket.util.TransferUtil;
@@ -177,7 +177,7 @@ public class ServerSession {
 			Object returnObj = execute(to);
 			send(to, returnObj);
 			
-        } catch (TatalaReturnException tre) {
+        } catch (TatalaRollbackException tre) {
 			log.error("Tatala Return Exception: Callee Class and Method: [" + to.getCalleeClass() + "."+ to.getCalleeMethod() + "] e: " + tre, tre);
 			try {
 				to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
@@ -239,8 +239,8 @@ public class ServerSession {
 				retobj = meth.invoke(calleeObject, to);
 			}
 		} catch (InvocationTargetException ite) {
-			if(ite.getCause() instanceof TatalaReturnException){
-				TatalaReturnException tre = (TatalaReturnException)ite.getCause();
+			if(ite.getCause() instanceof TatalaRollbackException){
+				TatalaRollbackException tre = (TatalaRollbackException)ite.getCause();
 				throw tre;
 			} else {
 				log.error("Server execute error e: " + ite, ite);
