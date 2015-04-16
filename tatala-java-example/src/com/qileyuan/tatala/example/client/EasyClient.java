@@ -10,9 +10,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
 import com.qileyuan.tatala.example.service.TestManager;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.proxy.ClientProxyFactory;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
@@ -34,7 +34,7 @@ public class EasyClient {
 	private TestManager manager;
 	
 	public EasyClient() {
-		transferObjectFactory = new TransferObjectFactory("test1", true);
+		transferObjectFactory = new TransferObjectFactory("127.0.0.1", 10001, 5000);
 		transferObjectFactory.setImplClass("com.qileyuan.tatala.example.service.TestManagerImpl");
 		transferObjectFactory.setCompress(true);
 		manager = (TestManager)ClientProxyFactory.create(TestManager.class, transferObjectFactory);

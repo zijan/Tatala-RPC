@@ -231,12 +231,7 @@ public class TransferUtil {
 		if(to.isServerCall()){
 			sendData[0] |= TransferObject.SERVERCALL_FLAG;
 		}
-		
-		//set long connection flag
-        if (to.isLongConnection()) {
-            sendData[0] |= TransferObject.LONGCONNECTION_FLAG;
-        }
-        
+
         //set new version flag
         if (to.isNewVersion()) {
             sendData[0] |= TransferObject.NEWVERSION_FLAG;
@@ -276,11 +271,6 @@ public class TransferUtil {
 			toByteArray = TransferUtil.getInputByNormal(toByteArray);
 		}
 		to.setByteData(toByteArray);
-		
-		//set long connection flag
-		if(TransferUtil.isLongConnection(flagbyte)){
-			to.setLongConnection(true);
-		}
 		
 		return to;
     }
@@ -386,10 +376,6 @@ public class TransferUtil {
 	
 	public static boolean isServerCall(byte b){
 		return (TransferObject.SERVERCALL_FLAG & b) != 0;
-	}
-	
-	public static boolean isLongConnection(byte b){
-		return (TransferObject.LONGCONNECTION_FLAG & b) != 0;
 	}
 	
 	public static boolean isNewVersion(byte b){

@@ -30,10 +30,10 @@ public class LongClientSession{
 	static final int BUFFER_SIZE = 1024;
 	static final int QUEUE_SIZE = 10;
 	
-	private String hostIp;
-	private int hostPort;
+	private String ip;
+	private int port;
 	private int timeout;
-	private int retryTime;
+	
 	private AsynchronousSocketChannel socketChannel;
 	private AioClientReceiveHandler aioClientReceiveHandler = new AioClientReceiveHandler();
 	private BlockingQueue<byte[]> receiveQueue = new LinkedTransferQueue<byte[]>();
@@ -47,11 +47,10 @@ public class LongClientSession{
 	private int receiveLength = 0;
 	private boolean closed = false;
 	
-	public LongClientSession(String hostIp, int hostPort, int timeout, int retryTime){
-		this.hostIp = hostIp;
-		this.hostPort = hostPort;
+	public LongClientSession(String ip, int port, int timeout){
+		this.ip = ip;
+		this.port = port;
 		this.timeout = timeout;
-		this.retryTime = retryTime;
 	}
 	
 	public Object start(TransferObject to) {
@@ -97,13 +96,12 @@ public class LongClientSession{
 	
 	private void connect() throws BindException{
 		String errorMessage = "";
-		int retry = retryTime;
-		while ((socketChannel == null || !socketChannel.isOpen() || closed) && retry > 0) {
+		if (socketChannel == null || !socketChannel.isOpen() || closed) {
 			try {
 				socketChannel = AsynchronousSocketChannel.open();
 				socketChannel.setOption(StandardSocketOptions.SO_REUSEADDR, true);
 				socketChannel.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
-				socketChannel.connect(new InetSocketAddress(hostIp, hostPort)).get(timeout, TimeUnit.MILLISECONDS);
+				socketChannel.connect(new InetSocketAddress(ip, port)).get(timeout, TimeUnit.MILLISECONDS);
 				closed = false;
 				log.debug("Session start to " + socketChannel.getRemoteAddress());
 				
@@ -112,10 +110,6 @@ public class LongClientSession{
 			} catch (Exception e) {
 				log.error("Connection error: " + e.getMessage());
 				errorMessage = e.getMessage();
-			}
-			retry--;
-			if (socketChannel == null) {
-				log.error("Retry time: " + retry);
 			}
 		}
 		if (socketChannel == null) {

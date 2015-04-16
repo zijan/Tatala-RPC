@@ -2,8 +2,8 @@ package com.qileyuan.tatala.example.client;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.model.TestAccount;
 import com.qileyuan.tatala.example.proxy.TestClientProxy;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 
 /**
  * This class is a sample for client, 

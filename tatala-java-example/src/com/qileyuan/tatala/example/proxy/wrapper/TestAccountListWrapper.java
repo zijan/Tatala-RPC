@@ -3,7 +3,7 @@ package com.qileyuan.tatala.example.proxy.wrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.qileyuan.tatala.example.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.socket.io.TransferInputStream;
 import com.qileyuan.tatala.socket.io.TransferOutputStream;
 import com.qileyuan.tatala.socket.to.TransferObjectWrapper;

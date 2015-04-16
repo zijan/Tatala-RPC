@@ -4,9 +4,9 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
 import com.qileyuan.tatala.example.proxy.NewToClientProxy;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 
 /**
  * This class is a sample for client.

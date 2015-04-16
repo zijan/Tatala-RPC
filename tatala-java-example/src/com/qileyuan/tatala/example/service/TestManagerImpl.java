@@ -10,8 +10,8 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 
 
 /**

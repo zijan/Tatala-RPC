@@ -3,14 +3,14 @@ package com.qileyuan.tatala.example.proxy;
 import java.util.List;
 import java.util.Map;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
 import com.qileyuan.tatala.example.proxy.wrapper.AllTypeBeanWrapper;
 import com.qileyuan.tatala.example.proxy.wrapper.TestAccountListWrapper;
 import com.qileyuan.tatala.example.proxy.wrapper.TestAccountMapWrapper;
 import com.qileyuan.tatala.example.proxy.wrapper.TestAccountWrapper;
 import com.qileyuan.tatala.example.service.TestManager;
 import com.qileyuan.tatala.example.service.TestManagerImpl;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.socket.to.StandardTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 

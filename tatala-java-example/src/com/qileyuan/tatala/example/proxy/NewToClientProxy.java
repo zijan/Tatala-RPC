@@ -2,18 +2,23 @@ package com.qileyuan.tatala.example.proxy;
 
 import java.util.Date;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.executor.ServerExecutor;
 import com.qileyuan.tatala.socket.to.NewTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
 public class NewToClientProxy {
+
+	private String IP = "127.0.0.1";
+	private int PORT = 10001;
+	private int TIMEOUT = 5000;
+	
 	private TransferObjectFactory transferObjectFactory;
 
 	public NewToClientProxy(){
-		transferObjectFactory = new TransferObjectFactory("test1", false);
+		transferObjectFactory = new TransferObjectFactory(IP, PORT, TIMEOUT);
 		transferObjectFactory.setCalleeClass("com.qileyuan.tatala.example.proxy.NewToServerProxy");
 	}
 	

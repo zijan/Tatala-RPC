@@ -24,12 +24,10 @@ import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.NetworkUtil;
 import com.qileyuan.tatala.socket.util.TransferUtil;
-import com.qileyuan.tatala.util.Configuration;
 
 public class ServerSession {
 	Logger log = Logger.getLogger(ServerSession.class);
 	static final int BUFFER_SIZE = 1024;
-	static final int DEFAULT_SERVER_POOL_SIZE = 10;
 	
 	private final ReentrantLock writeLock = new ReentrantLock(); //socket channel write lock
 	//may need not to cache
@@ -52,8 +50,7 @@ public class ServerSession {
 	private List<SessionFilter> sessionFilterList = new ArrayList<SessionFilter>();
 	
 	static{
-		int poolSize = Configuration.getIntProperty("Server.Socket.poolSize", DEFAULT_SERVER_POOL_SIZE);
-		executorService = Executors.newFixedThreadPool(poolSize);
+		executorService = Executors.newCachedThreadPool();
 	}
 	
 	public void start(){
@@ -163,16 +160,13 @@ public class ServerSession {
         try {
 	        to = TransferUtil.byteArrayToTransferObject(receiveData);
 
-	        //only long connection put into session map
-	        if(to.isLongConnection()){
-				//put current session into session map, key is client IP and port
-				long clientId = NetworkUtil.getClientIdBySocketChannel(socketChannel);
-				if(!AioSocketServer.getSessionMap().containsKey(clientId)){
-					AioSocketServer.getSessionMap().put(clientId, this);
-				}
-		        //set clientId to TransferObject
-		        to.setClientId(clientId);
-	        }
+	        //put current session into session map, key is client IP and port
+			long clientId = NetworkUtil.getClientIdBySocketChannel(socketChannel);
+			if(!AioSocketServer.getSessionMap().containsKey(clientId)){
+				AioSocketServer.getSessionMap().put(clientId, this);
+			}
+	        //set clientId to TransferObject
+	        to.setClientId(clientId);
 
 			Object returnObj = execute(to);
 			send(to, returnObj);

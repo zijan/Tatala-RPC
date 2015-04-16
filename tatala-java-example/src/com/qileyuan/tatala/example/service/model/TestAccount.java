@@ -1,4 +1,4 @@
-package com.qileyuan.tatala.example.model;
+package com.qileyuan.tatala.example.service.model;
 
 import java.io.Serializable;
 

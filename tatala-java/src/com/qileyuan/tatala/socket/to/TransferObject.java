@@ -25,7 +25,7 @@ public abstract class TransferObject {
 	public static final byte NORMAL_FLAG = 0;
 	public static final byte COMPRESS_FLAG = 1;
 	public static final byte SERVERCALL_FLAG = 1 << 1;
-	public static final byte LONGCONNECTION_FLAG = 1 << 2;
+	//public static final byte LONGCONNECTION_FLAG = 1 << 2;
 	public static final byte NEWVERSION_FLAG = 1 << 3;
 	
 	public static final byte DATATYPE_VOID = 0;
@@ -62,7 +62,6 @@ public abstract class TransferObject {
 	
 	protected boolean asynchronous;
 	protected boolean compress;
-	protected boolean longConnection;
 	protected long clientId;
 	protected boolean serverCall;
 	protected boolean newVersion;
@@ -116,14 +115,6 @@ public abstract class TransferObject {
 
 	public void setCompress(boolean compress) {
 		this.compress = compress;
-	}
-
-	public boolean isLongConnection() {
-		return longConnection;
-	}
-
-	public void setLongConnection(boolean longConnection) {
-		this.longConnection = longConnection;
 	}
 	
 	public long getClientId() {

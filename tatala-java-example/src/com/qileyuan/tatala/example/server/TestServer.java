@@ -1,11 +1,10 @@
-package com.qileyuan.tatala.example.service;
+package com.qileyuan.tatala.example.server;
 
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.proxy.TestDefaultProxy;
 import com.qileyuan.tatala.proxy.DefaultProxy;
 import com.qileyuan.tatala.socket.server.AioSocketServer;
-import com.qileyuan.tatala.util.Configuration;
 
 public class TestServer {
 	static Logger log = Logger.getLogger(TestServer.class);
@@ -14,11 +13,9 @@ public class TestServer {
 		log.info("Test Socket Server initialize...");
 	}
 	
-	public static void startup(){
+	public static void startup(int listenPort, int poolSize){
 		log.info("Test Socket Server starting...");
 		
-		int listenPort = Configuration.getIntProperty("Server.Socket.listenPort");
-		int poolSize = Configuration.getIntProperty("Server.Socket.poolSize");
 		AioSocketServer server = new AioSocketServer(listenPort, poolSize);
 		
 		try {
@@ -32,7 +29,14 @@ public class TestServer {
 	
 	public static void main(String args[]) {
 		log.info("*** Test Socket Server ***");
+		int listenPort = 10001;
+		int poolSize = 16;
+		if(args != null && args.length > 1){
+			listenPort = Integer.parseInt(args[0]);
+			poolSize = Integer.parseInt(args[1]);
+		}
+		 
 		initialize();
-		startup();
+		startup(listenPort, poolSize);
 	}
 }

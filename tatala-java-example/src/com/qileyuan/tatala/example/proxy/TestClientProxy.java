@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
 import com.qileyuan.tatala.example.proxy.wrapper.AllTypeBeanWrapper;
 import com.qileyuan.tatala.example.proxy.wrapper.TestAccountListWrapper;
 import com.qileyuan.tatala.example.proxy.wrapper.TestAccountMapWrapper;
 import com.qileyuan.tatala.example.proxy.wrapper.TestAccountWrapper;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.executor.ServerExecutor;
 import com.qileyuan.tatala.socket.to.StandardTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
@@ -33,13 +33,15 @@ import com.qileyuan.tatala.socket.to.TransferObjectFactory;
  */
 public class TestClientProxy {
 
+	private String IP = "127.0.0.1";
+	private int PORT = 10001;
+	private int TIMEOUT = 5000;
+	
 	private TransferObjectFactory transferObjectFactory;
 
 	public TestClientProxy(){
 		//create long connection factory
-		transferObjectFactory = new TransferObjectFactory("test1", true);
-		//create short connection factory
-		//transferObjectFactory = new TransferObjectFactory("test1");
+		transferObjectFactory = new TransferObjectFactory(IP, PORT, TIMEOUT);
 	}
 	
 	public String sayHello(int Id, String name) {

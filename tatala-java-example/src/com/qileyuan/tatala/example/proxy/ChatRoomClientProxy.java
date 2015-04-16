@@ -7,7 +7,11 @@ import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
 public class ChatRoomClientProxy {
-	private TransferObjectFactory transferObjectFactory = new TransferObjectFactory("test1", true);
+	private String IP = "127.0.0.1";
+	private int PORT = 10002;
+	private int TIMEOUT = 5000;
+	
+	private TransferObjectFactory transferObjectFactory = new TransferObjectFactory(IP, PORT, TIMEOUT);
 	
 	public ChatRoomClientProxy(){
 		DefaultProxy clientDefaultProxy = new ChatRoomClientDefaultProxy();

@@ -1,9 +1,9 @@
 package com.qileyuan.tatala.example.proxy;
 
-import com.qileyuan.tatala.example.model.AllTypeBean;
-import com.qileyuan.tatala.example.model.TestAccount;
 import com.qileyuan.tatala.example.service.TestManager;
 import com.qileyuan.tatala.example.service.TestManagerImpl;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.socket.to.NewTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
