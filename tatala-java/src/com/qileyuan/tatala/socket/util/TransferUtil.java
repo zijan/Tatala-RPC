@@ -11,8 +11,8 @@ import java.util.zip.Inflater;
 import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.io.TransferInputStream;
 import com.qileyuan.tatala.socket.io.TransferOutputStream;
-import com.qileyuan.tatala.socket.to.NewTransferObject;
-import com.qileyuan.tatala.socket.to.StandardTransferObject;
+import com.qileyuan.tatala.socket.to.MappedTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectWrapper;
 
@@ -232,9 +232,9 @@ public class TransferUtil {
 			sendData[0] |= TransferObject.SERVERCALL_FLAG;
 		}
 
-        //set new version flag
-        if (to.isNewVersion()) {
-            sendData[0] |= TransferObject.NEWVERSION_FLAG;
+        //set mapped version flag
+        if (to.isMappedVersion()) {
+            sendData[0] |= TransferObject.MAPPEDVERSION_FLAG;
         }
         
         //if not server call, add tatala flag data at head
@@ -257,12 +257,10 @@ public class TransferUtil {
 
 		byte flagbyte = byteArray[0];
 		
-		TransferObject to = null;
-		//check if new version of transfer object
-		if(TransferUtil.isNewVersion(flagbyte)){
-			to = new NewTransferObject();
-		} else {
-			to = new StandardTransferObject();
+		TransferObject to = new OrderedTransferObject();
+		//check if mapped version of transfer object
+		if(TransferUtil.isMappedVersion(flagbyte)){
+			to = new MappedTransferObject();
 		}
 		
 		if (TransferUtil.isCompress(flagbyte)) {
@@ -378,8 +376,8 @@ public class TransferUtil {
 		return (TransferObject.SERVERCALL_FLAG & b) != 0;
 	}
 	
-	public static boolean isNewVersion(byte b){
-		return (TransferObject.NEWVERSION_FLAG & b) != 0;
+	public static boolean isMappedVersion(byte b){
+		return (TransferObject.MAPPEDVERSION_FLAG & b) != 0;
 	}
     
     public static String byteArrayToString(byte[] byteArray){

@@ -11,7 +11,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
-import com.qileyuan.tatala.socket.to.NewTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -24,7 +24,7 @@ public class ServerProxy extends DefaultProxy{
 	static Logger log = Logger.getLogger(ServerProxy.class);
 	
 	public Object execute(TransferObject abstractTo){
-		NewTransferObject to = (NewTransferObject)abstractTo;
+		OrderedTransferObject to = (OrderedTransferObject)abstractTo;
 		
 		String implClass = to.getString();
 		String implMethod = to.getString();

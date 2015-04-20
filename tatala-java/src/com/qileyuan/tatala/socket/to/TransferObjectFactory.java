@@ -47,9 +47,9 @@ public class TransferObjectFactory {
 	public void setCompress(boolean compress) {
 		this.compress = compress;
 	}
-
-	public StandardTransferObject createTransferObject(){
-		StandardTransferObject to = new StandardTransferObject();
+	
+	public OrderedTransferObject createTransferObject(){
+		OrderedTransferObject to = new OrderedTransferObject();
 		to.setConnection(connection);
 		to.setServerCallProxy(serverCallProxy);
 		if(calleeClass != null){
@@ -59,15 +59,16 @@ public class TransferObjectFactory {
 		return to;
 	}
 	
-	public NewTransferObject createNewTransferObject(){
-		NewTransferObject to = new NewTransferObject();
+	@Deprecated
+	public MappedTransferObject createMappedTransferObject(){
+		MappedTransferObject to = new MappedTransferObject();
 		to.setConnection(connection);
 		to.setServerCallProxy(serverCallProxy);
 		if(calleeClass != null){
 			to.setCalleeClass(calleeClass);
 		}
 		to.setCompress(compress);
-		to.setNewVersion(true);
+		to.setMappedVersion(true);
 		return to;
 	}
 }
