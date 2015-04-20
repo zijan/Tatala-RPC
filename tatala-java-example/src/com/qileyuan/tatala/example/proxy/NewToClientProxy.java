@@ -5,7 +5,7 @@ import java.util.Date;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.executor.ServerExecutor;
-import com.qileyuan.tatala.socket.to.NewTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
@@ -24,34 +24,34 @@ public class NewToClientProxy {
 	
 	public String sayHello(int Id, String name) {
 		
-		NewTransferObject newto = transferObjectFactory.createNewTransferObject();
+		OrderedTransferObject to = transferObjectFactory.createTransferObject();
 
-		newto.setCalleeMethod("sayHello");
-		newto.registerReturnType(NewTransferObject.DATATYPE_STRING);
+		to.setCalleeMethod("sayHello");
+		to.registerReturnType(TransferObject.DATATYPE_STRING);
 
-		newto.putInt(Id);
-		newto.putString(name);
+		to.putInt(Id);
+		to.putString(name);
 
-		Object resultObj = ServerExecutor.execute(newto);
+		Object resultObj = ServerExecutor.execute(to);
 		String result = (String) resultObj;
 
 		return result;
 	}
 	
 	public void doSomething() {
-		NewTransferObject newto = transferObjectFactory.createNewTransferObject();
+		OrderedTransferObject to = transferObjectFactory.createTransferObject();
 
-		newto.setCalleeMethod("doSomething");
-		newto.registerReturnType(NewTransferObject.DATATYPE_VOID);
+		to.setCalleeMethod("doSomething");
+		to.registerReturnType(TransferObject.DATATYPE_VOID);
 
-		ServerExecutor.execute(newto);
+		ServerExecutor.execute(to);
 	}
 	
 	public AllTypeBean allTypeTest(boolean aboolean, byte abyte,
 			short ashort, char achar, int aint, long along, float afloat,
 			double adouble, Date adate, String astring){
 		
-		NewTransferObject to = transferObjectFactory.createNewTransferObject();
+		OrderedTransferObject to = transferObjectFactory.createTransferObject();
 		
 		to.setCalleeMethod("allTypeTest");
 		to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
@@ -72,7 +72,7 @@ public class NewToClientProxy {
 	
 	public String[] getArray(byte[] bytearr, String[] strarr) {
 
-		NewTransferObject to = transferObjectFactory.createNewTransferObject();
+		OrderedTransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("getArray");
 		to.registerReturnType(TransferObject.DATATYPE_STRINGARRAY);
@@ -87,7 +87,7 @@ public class NewToClientProxy {
 	}
 	
 	public TestAccount getAccountCompress(TestAccount account) {
-		NewTransferObject to = transferObjectFactory.createNewTransferObject();
+		OrderedTransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);

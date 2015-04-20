@@ -4,14 +4,14 @@ import com.qileyuan.tatala.example.service.TestManager;
 import com.qileyuan.tatala.example.service.TestManagerImpl;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.TestAccount;
-import com.qileyuan.tatala.socket.to.NewTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 public class NewToServerProxy {
 	private TestManager manager = new TestManagerImpl();
 
 	public String sayHello(TransferObject baseto) {
-		NewTransferObject to = (NewTransferObject)baseto;
+		OrderedTransferObject to = (OrderedTransferObject)baseto;
 		int Id = to.getInt();
 		String name =  to.getString();
 
@@ -24,7 +24,7 @@ public class NewToServerProxy {
 	}
 	
 	public AllTypeBean allTypeTest(TransferObject baseto) {
-		NewTransferObject to = (NewTransferObject)baseto;
+		OrderedTransferObject to = (OrderedTransferObject)baseto;
 		AllTypeBean allTypeBean = manager.getAllTypeBean(
 				to.getBoolean(), to.getByte(),
 				to.getShort(), to.getChar(), to.getInt(),
@@ -36,7 +36,7 @@ public class NewToServerProxy {
 	}
 	
 	public String[] getArray(TransferObject baseto) {
-		NewTransferObject to = (NewTransferObject)baseto;
+		OrderedTransferObject to = (OrderedTransferObject)baseto;
 		byte[] bytearr = to.getByteArray();
 		String[] strarr = to.getStringArray();
 
@@ -45,7 +45,7 @@ public class NewToServerProxy {
 	}
 	
 	public TestAccount getAccount(TransferObject baseto) {
-		NewTransferObject to = (NewTransferObject)baseto;
+		OrderedTransferObject to = (OrderedTransferObject)baseto;
 		TestAccount account = (TestAccount) to.getSerializable();
 		TestAccount returnAccount = manager.getAccount(account);
 

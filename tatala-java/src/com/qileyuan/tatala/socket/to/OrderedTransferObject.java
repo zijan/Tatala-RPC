@@ -34,8 +34,7 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * 	Flag:
  * 	compress = 1;
  * 	servercall = 1 << 1;
- * 	longconnection = 1 << 2;
- * 	TransferObjectVersion = 1 << 3;(NewTransferObject)
+ * 	defaultCallee = 1 << 2;
  * 	
  * 	Server -> Client
  * 	normal:
@@ -47,7 +46,7 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * @author JimT
  * 
  */
-public class NewTransferObject extends TransferObject {
+public class OrderedTransferObject extends TransferObject {
 
 	class ValueObject {
 		private byte dataType;
@@ -61,10 +60,6 @@ public class NewTransferObject extends TransferObject {
 
 	private Queue<ValueObject> paramList = new LinkedList<ValueObject>();
 
-	public NewTransferObject(){
-		newVersion = true;
-	}
-	
 	/** Parameter Map **/
 	public int paramSize(){
 		return paramList.size();

@@ -2,7 +2,7 @@ package com.qileyuan.tatala.example.proxy;
 
 import com.qileyuan.tatala.executor.ServerExecutor;
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.to.StandardTransferObject;
+import com.qileyuan.tatala.socket.to.MappedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
@@ -19,7 +19,7 @@ public class ChatRoomClientProxy {
 	}
 	
 	public void login(String username){
-		StandardTransferObject to = transferObjectFactory.createTransferObject();
+		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ChatRoomServerProxy");
 		to.setCalleeMethod("login");
 		to.putString("username", username);
@@ -28,7 +28,7 @@ public class ChatRoomClientProxy {
 	}
 	
 	public void sendMessage(String message){
-		StandardTransferObject to = transferObjectFactory.createTransferObject();
+		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ChatRoomServerProxy");
 		to.setCalleeMethod("receiveMessage");
 		to.putString("message", message);

@@ -11,7 +11,7 @@ import com.qileyuan.tatala.example.service.TestManager;
 import com.qileyuan.tatala.example.service.TestManagerImpl;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.TestAccount;
-import com.qileyuan.tatala.socket.to.StandardTransferObject;
+import com.qileyuan.tatala.socket.to.MappedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -32,7 +32,7 @@ public class TestServerProxy {
 	private TestManager manager = new TestManagerImpl();
 
 	public String sayHello(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		int Id = to.getInt("Id");
 		String name = to.getString("name");
 
@@ -45,13 +45,13 @@ public class TestServerProxy {
 	}
 	
 	public void callServer(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		int Id = to.getInt("Id");
 		manager.callServer(Id);
 	}
 
 	public TestAccountWrapper getAccount(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		TestAccountWrapper accountWrapper = (TestAccountWrapper) to.getWrapper("account");
 		TestAccount account = accountWrapper.getAccount();
 		TestAccount returnAccount = manager.getAccount(account);
@@ -64,14 +64,14 @@ public class TestServerProxy {
 	}
 
 	public TestAccount getAccountSerializable(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		TestAccount account = (TestAccount) to.getSerializable("account");
 		TestAccount returnAccount = manager.getAccount(account);
 		return returnAccount;
 	}
 
 	public TestAccountWrapper getAccount2(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		TestAccountWrapper accountWrapper = (TestAccountWrapper) to.getWrapper("account");
 		TestAccount account = accountWrapper.getAccount();
 		TestAccountWrapper accountWrapper2 = (TestAccountWrapper) to.getWrapper("account2");
@@ -83,7 +83,7 @@ public class TestServerProxy {
 	}
 
 	public TestAccountListWrapper getAccountList(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		TestAccountListWrapper testAccountListWrapper = (TestAccountListWrapper) to.getWrapper("accountList");
 		List<TestAccount> accountList = testAccountListWrapper.getTestAccountList();
 		accountList = manager.getAccountList(accountList);
@@ -93,7 +93,7 @@ public class TestServerProxy {
 	}
 
 	public TestAccountMapWrapper getAccountMap(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		TestAccountMapWrapper testAccountMapWrapper = (TestAccountMapWrapper) to.getWrapper("accountMap");
 		Map<String, TestAccount> accountMap = testAccountMapWrapper.getTestAccountMap();
 		accountMap = manager.getAccountMap(accountMap);
@@ -103,7 +103,7 @@ public class TestServerProxy {
 	}
 	
 	public AllTypeBeanWrapper getAllTypeBean(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		AllTypeBean allTypeBean = manager.getAllTypeBean(
 				to.getBoolean("aboolean"), to.getByte("abyte"),
 				to.getShort("ashort"), to.getChar("achar"), to.getInt("aint"),
@@ -116,7 +116,7 @@ public class TestServerProxy {
 	}
 
 	public String[] getArray(TransferObject baseto) {
-		StandardTransferObject to = (StandardTransferObject)baseto;
+		MappedTransferObject to = (MappedTransferObject)baseto;
 		byte[] bytearr = to.getByteArray("bytearr");
 		String[] strarr = to.getStringArray("strarr");
 

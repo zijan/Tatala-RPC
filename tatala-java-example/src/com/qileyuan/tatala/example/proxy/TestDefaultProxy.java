@@ -7,7 +7,7 @@ import com.qileyuan.tatala.example.service.TestManagerImpl;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.TestAccount;
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.to.StandardTransferObject;
+import com.qileyuan.tatala.socket.to.MappedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -20,7 +20,7 @@ public class TestDefaultProxy extends DefaultProxy{
 	private TestManager manager = new TestManagerImpl();
 	
 	public Object execute(TransferObject abstractto){
-		StandardTransferObject to = (StandardTransferObject)abstractto;
+		MappedTransferObject to = (MappedTransferObject)abstractto;
 		String calleeMethod = to.getCalleeMethod();
 		
 		if(calleeMethod.equals("sayHello")){

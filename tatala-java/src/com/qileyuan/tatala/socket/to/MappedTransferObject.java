@@ -48,8 +48,8 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * 	Flag:
  * 	compress = 1;
  * 	servercall = 1 << 1;
- * 	longconnection = 1 << 2;
- * 	TransferObjectVersion = 1 << 3;(NewTransferObject)
+ * 	defaultCallee = 1 << 2;
+ * 	TransferObjectVersion = 1 << 3;(MappedTransferObject)
  * 	
  * 	Server -> Client
  * 	normal:
@@ -59,9 +59,11 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * </pre>
  * 
  * @author JimT
- * 
+ * @deprecated uses OrderedTransgerObject
  */
-public class StandardTransferObject extends TransferObject {
+
+@Deprecated
+public class MappedTransferObject extends TransferObject {
 
 	private Map<String, Boolean> booleanMap = new HashMap<String, Boolean>();
 	private Map<String, Byte> byteMap = new HashMap<String, Byte>();
@@ -84,6 +86,10 @@ public class StandardTransferObject extends TransferObject {
 
 	private Map<String, Serializable> serializableMap = new HashMap<String, Serializable>();
 
+	public MappedTransferObject(){
+		mappedVersion = true;
+	}
+	
 	/** Parameter Map **/
 	public void putBoolean(String key, boolean value) {
 		booleanMap.put(key, value);
