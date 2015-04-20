@@ -26,6 +26,7 @@ public abstract class TransferObject {
 	public static final byte COMPRESS_FLAG = 1;
 	public static final byte SERVERCALL_FLAG = 1 << 1;
 	//public static final byte LONGCONNECTION_FLAG = 1 << 2;
+	public static final byte DEFAULTCALLEE_FLAG = 1 << 2;
 	public static final byte NEWVERSION_FLAG = 1 << 3;
 	
 	public static final byte DATATYPE_VOID = 0;
@@ -64,6 +65,7 @@ public abstract class TransferObject {
 	protected boolean compress;
 	protected long clientId;
 	protected boolean serverCall;
+	protected boolean defaultCallee;
 	protected boolean newVersion;
 	protected DefaultProxy serverCallProxy;
 	
@@ -133,6 +135,14 @@ public abstract class TransferObject {
 		this.serverCall = serverCall;
 	}
 	
+	public boolean isDefaultCallee() {
+		return defaultCallee;
+	}
+
+	public void setDefaultCallee(boolean defaultCallee) {
+		this.defaultCallee = defaultCallee;
+	}
+
 	public boolean isNewVersion() {
 		return newVersion;
 	}

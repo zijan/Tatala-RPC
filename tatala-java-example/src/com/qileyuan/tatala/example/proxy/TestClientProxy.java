@@ -146,6 +146,7 @@ public class TestClientProxy {
 		
 		//don't set callee class, handle with default server proxy
 		//to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setDefaultCallee(true);
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 

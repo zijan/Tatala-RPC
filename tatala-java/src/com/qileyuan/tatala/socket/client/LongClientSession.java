@@ -224,7 +224,7 @@ public class LongClientSession{
 			}
 
 			//Check default proxy, don't need reflection.
-			if(calleeClassName.equals(TransferObject.DEFAULT_PROXY)){
+			if(to.isDefaultCallee() || calleeClassName.equals(TransferObject.DEFAULT_PROXY)){
 				if(serverCallProxy != null){
 					serverCallProxy.execute(to);
 				}

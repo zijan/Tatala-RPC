@@ -206,7 +206,7 @@ public class ServerSession {
 			}
 			
 			//Check default proxy, don't need reflection.
-			if(calleeClassName.equals(TransferObject.DEFAULT_PROXY)){
+			if(to.isDefaultCallee() || calleeClassName.equals(TransferObject.DEFAULT_PROXY)){
 				if(defaultProxy != null){
 					retobj = defaultProxy.execute(to);
 				}
