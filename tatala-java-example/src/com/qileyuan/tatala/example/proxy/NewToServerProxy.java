@@ -1,14 +1,14 @@
 package com.qileyuan.tatala.example.proxy;
 
-import com.qileyuan.tatala.example.service.TestManager;
-import com.qileyuan.tatala.example.service.TestManagerImpl;
+import com.qileyuan.tatala.example.service.ExampleManager;
+import com.qileyuan.tatala.example.service.ExampleManagerImpl;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 public class NewToServerProxy {
-	private TestManager manager = new TestManagerImpl();
+	private ExampleManager manager = new ExampleManagerImpl();
 
 	public String sayHello(TransferObject baseto) {
 		OrderedTransferObject to = (OrderedTransferObject)baseto;
@@ -44,10 +44,10 @@ public class NewToServerProxy {
 		return result;
 	}
 	
-	public TestAccount getAccount(TransferObject baseto) {
+	public Account getAccount(TransferObject baseto) {
 		OrderedTransferObject to = (OrderedTransferObject)baseto;
-		TestAccount account = (TestAccount) to.getSerializable();
-		TestAccount returnAccount = manager.getAccount(account);
+		Account account = (Account) to.getSerializable();
+		Account returnAccount = manager.getAccount(account);
 
 		return returnAccount;
 	}

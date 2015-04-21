@@ -2,12 +2,7 @@ package com.qileyuan.tatala.example.service.model;
 
 import java.io.Serializable;
 
-/**
- * This class is a customization object.
- * @author JimT
- *
- */
-public class TestAccount implements Serializable{
+public class Account implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;

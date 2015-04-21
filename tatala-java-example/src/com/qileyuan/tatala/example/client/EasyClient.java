@@ -10,9 +10,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.service.TestManager;
+import com.qileyuan.tatala.example.service.ExampleManager;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.proxy.ClientProxyFactory;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
@@ -31,25 +31,25 @@ public class EasyClient {
 	static Logger log = Logger.getLogger(EasyClient.class);
 	
 	private TransferObjectFactory transferObjectFactory;
-	private TestManager manager;
+	private ExampleManager manager;
 	
 	public EasyClient() {
 		transferObjectFactory = new TransferObjectFactory("127.0.0.1", 10001, 5000);
-		transferObjectFactory.setImplClass("com.qileyuan.tatala.example.service.TestManagerImpl");
+		transferObjectFactory.setImplClass("com.qileyuan.tatala.example.service.ExampleManagerImpl");
 		transferObjectFactory.setCompress(true);
-		manager = (TestManager)ClientProxyFactory.create(TestManager.class, transferObjectFactory);
+		manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 	}
 
 	public static void main(String[] args) {
 		
-		EasyClient ec = new EasyClient();
+		EasyClient easyClient = new EasyClient();
 		
 		long l = System.currentTimeMillis();
 		log.info("connect time: " + (System.currentTimeMillis() - l) + "(ms)");
 		
 		l = System.currentTimeMillis();
 		
-		ec.remoteTest();
+		easyClient.remoteTest();
 		
 		log.info("time: " + (System.currentTimeMillis() - l) + "(ms)");
 	}
@@ -70,7 +70,7 @@ public class EasyClient {
 			manager.doSomething();
 			
 			//object parameter, object return testing
-			TestAccount account = new TestAccount();
+			Account account = new Account();
 			account.setId(1000);
 			account.setName("JimT");
 			account = manager.getAccount(account);
@@ -98,10 +98,10 @@ public class EasyClient {
 			}
 			
 			//list parameter, list return testing
-			account = new TestAccount();
-			List<TestAccount> accountList = new ArrayList<TestAccount>();
+			account = new Account();
+			List<Account> accountList = new ArrayList<Account>();
 			for(int i=0; i<3; i++){
-				account = new TestAccount();
+				account = new Account();
 				account.setId(i);
 				accountList.add(account);
 			}
@@ -109,9 +109,9 @@ public class EasyClient {
 			log.debug("accountList: "+accountList);
 			
 			//map parameter, map return testing
-			Map<String, TestAccount> accountMap = new HashMap<String, TestAccount>();
+			Map<String, Account> accountMap = new HashMap<String, Account>();
 			for(int i=0; i<3; i++){
-				account = new TestAccount();
+				account = new Account();
 				account.setId(i);
 				accountMap.put("Key"+i, account);
 			}
@@ -119,26 +119,17 @@ public class EasyClient {
 			log.debug("accountMap: "+accountMap);
 			
 			//set parameter, set return testing
-			Set<TestAccount> accountSet = new HashSet<TestAccount>();
+			Set<Account> accountSet = new HashSet<Account>();
 			for(int i=0; i<3; i++){
-				account = new TestAccount();
+				account = new Account();
 				account.setId(i);
 				accountSet.add(account);
 			}
 			accountSet = manager.getAccountSet(accountSet);
 			log.debug("accountSet: "+accountSet);
 			
-			//more than one object parameter, object return testing
-			TestAccount accountt = new TestAccount();
-			accountt.setId(1000);
-			TestAccount accountt2 = new TestAccount();
-			accountt2.setName("Tang");
-			accountt2.setAddress("Beijing");
-			account = manager.getAccount2(accountt, accountt2);
-			log.debug(account);
-			
 			//big content test
-			TestAccount bigAccount = new TestAccount();
+			Account bigAccount = new Account();
 			bigAccount.setId(1000);
 			String str = "";
 			for (int i = 0; i < 50; i++) {

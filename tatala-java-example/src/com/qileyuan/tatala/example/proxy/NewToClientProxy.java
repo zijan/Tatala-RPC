@@ -3,7 +3,7 @@ package com.qileyuan.tatala.example.proxy;
 import java.util.Date;
 
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.executor.ServerExecutor;
 import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
@@ -86,7 +86,7 @@ public class NewToClientProxy {
 		return result;
 	}
 	
-	public TestAccount getAccountCompress(TestAccount account) {
+	public Account getAccountCompress(Account account) {
 		OrderedTransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("getAccount");
@@ -95,7 +95,7 @@ public class NewToClientProxy {
 		to.putSerializable(account);
 		to.setCompress(true);
 
-		TestAccount ret = (TestAccount) ServerExecutor.execute(to);
+		Account ret = (Account) ServerExecutor.execute(to);
 		
 		return ret;
 	}

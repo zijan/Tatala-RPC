@@ -1,6 +1,6 @@
-package com.qileyuan.tatala.example.proxy.wrapper;
+package com.qileyuan.tatala.example.service.model.wrapper;
 
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.socket.io.TransferInputStream;
 import com.qileyuan.tatala.socket.io.TransferOutputStream;
 import com.qileyuan.tatala.socket.to.TransferObjectWrapper;
@@ -17,21 +17,21 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * @author JimT
  *
  */
-public class TestAccountWrapper implements TransferObjectWrapper {
-	private TestAccount account;
+public class AccountWrapper implements TransferObjectWrapper {
+	private Account account;
 
-	public TestAccountWrapper() {
+	public AccountWrapper() {
 	}
 	
-	public TestAccountWrapper(TestAccount account) {
+	public AccountWrapper(Account account) {
 		this.account = account;
 	}
 
-	public TestAccount getAccount() {
+	public Account getAccount() {
 		return account;
 	}
 
-	public void setAccount(TestAccount account) {
+	public void setAccount(Account account) {
 		this.account = account;
 	}
 
@@ -47,8 +47,8 @@ public class TestAccountWrapper implements TransferObjectWrapper {
 		touts.writeString(account.getAddress());
 	}
 
-	public TestAccountWrapper getObjectWrapper(TransferInputStream tins){
-		account = new TestAccount();
+	public AccountWrapper getObjectWrapper(TransferInputStream tins){
+		account = new Account();
 		account.setId(tins.readInt());
 		account.setName(tins.readString());
 		account.setAddress(tins.readString());

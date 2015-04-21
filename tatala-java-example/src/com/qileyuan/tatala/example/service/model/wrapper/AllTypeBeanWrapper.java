@@ -1,4 +1,4 @@
-package com.qileyuan.tatala.example.proxy.wrapper;
+package com.qileyuan.tatala.example.service.model.wrapper;
 
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.socket.io.TransferInputStream;

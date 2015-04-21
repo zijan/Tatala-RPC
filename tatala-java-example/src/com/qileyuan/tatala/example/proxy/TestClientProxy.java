@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import com.qileyuan.tatala.example.proxy.wrapper.AllTypeBeanWrapper;
-import com.qileyuan.tatala.example.proxy.wrapper.TestAccountListWrapper;
-import com.qileyuan.tatala.example.proxy.wrapper.TestAccountMapWrapper;
-import com.qileyuan.tatala.example.proxy.wrapper.TestAccountWrapper;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
+import com.qileyuan.tatala.example.service.model.wrapper.AccountListWrapper;
+import com.qileyuan.tatala.example.service.model.wrapper.AccountMapWrapper;
+import com.qileyuan.tatala.example.service.model.wrapper.AccountWrapper;
+import com.qileyuan.tatala.example.service.model.wrapper.AllTypeBeanWrapper;
 import com.qileyuan.tatala.executor.ServerExecutor;
 import com.qileyuan.tatala.socket.to.MappedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
@@ -68,30 +68,30 @@ public class TestClientProxy {
 		ServerExecutor.execute(to);
 	}
 	
-	public void callServer(int Id) {
+	public void exceptionCall(int Id) {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
-		to.setCalleeMethod("callServer");
+		to.setCalleeMethod("exceptionCall");
 		to.putInt("Id", Id);
 		to.registerReturnType(TransferObject.DATATYPE_VOID);
 
 		ServerExecutor.execute(to);
 	}
 
-	public TestAccount getAccount(TestAccount account) throws Exception {
+	public Account getAccount(Account account) throws Exception {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
-		TestAccountWrapper accountWrapper = new TestAccountWrapper(account);
+		AccountWrapper accountWrapper = new AccountWrapper(account);
 		to.putWrapper("account", accountWrapper);
 		//to.setLongConnection(true);
 
-		accountWrapper = (TestAccountWrapper) ServerExecutor.execute(to);
+		accountWrapper = (AccountWrapper) ServerExecutor.execute(to);
 
 		if(accountWrapper != null){
-			TestAccount returnAccount = accountWrapper.getAccount();
+			Account returnAccount = accountWrapper.getAccount();
 			return returnAccount;
 		}else{
 			return null;
@@ -99,42 +99,42 @@ public class TestClientProxy {
 	}
 
 	@SuppressWarnings("unchecked")
-	public TestAccount getAccountAsynchronous(TestAccount account) throws Exception {
+	public Account getAccountAsynchronous(Account account) throws Exception {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
-		TestAccountWrapper accountWrapper = new TestAccountWrapper(account);
+		AccountWrapper accountWrapper = new AccountWrapper(account);
 		to.putWrapper("account", accountWrapper);
 
 		to.setAsynchronous(true);
 
-		Future<TestAccountWrapper> future = (Future<TestAccountWrapper>) ServerExecutor.execute(to);
+		Future<AccountWrapper> future = (Future<AccountWrapper>) ServerExecutor.execute(to);
 
 		accountWrapper = future.get();
-		TestAccount returnAccount = accountWrapper.getAccount();
+		Account returnAccount = accountWrapper.getAccount();
 
 		return returnAccount;
 	}
 
-	public TestAccount getAccountCompress(TestAccount account) throws Exception {
+	public Account getAccountCompress(Account account) throws Exception {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
-		TestAccountWrapper accountWrapper = new TestAccountWrapper(account);
+		AccountWrapper accountWrapper = new AccountWrapper(account);
 		to.putWrapper("account", accountWrapper);
 		to.setCompress(true);
 
-		accountWrapper = (TestAccountWrapper) ServerExecutor.execute(to);
-		TestAccount returnAccount = accountWrapper.getAccount();
+		accountWrapper = (AccountWrapper) ServerExecutor.execute(to);
+		Account returnAccount = accountWrapper.getAccount();
 
 		return returnAccount;
 	}
 
-	public TestAccount getAccountDefaultProxy(TestAccount account) {
+	public Account getAccountDefaultProxy(Account account) {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		//don't set callee class, handle with default server proxy
 		//to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
@@ -142,82 +142,60 @@ public class TestClientProxy {
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
-		TestAccountWrapper accountWrapper = new TestAccountWrapper(account);
+		AccountWrapper accountWrapper = new AccountWrapper(account);
 		to.putWrapper("account", accountWrapper);
 
-		accountWrapper = (TestAccountWrapper) ServerExecutor.execute(to);
+		accountWrapper = (AccountWrapper) ServerExecutor.execute(to);
 		if (accountWrapper == null) {
 			return null;
 		}
-		TestAccount returnAccount = accountWrapper.getAccount();
+		Account returnAccount = accountWrapper.getAccount();
 
 		return returnAccount;
 	}
 
-	public TestAccount getAccountSerializable(TestAccount account) {
+	public Account getAccountSerializable(Account account) {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("getAccountSerializable");
 		to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
 		to.putSerializable("account", account);
 
-		TestAccount returnAccount = (TestAccount) ServerExecutor.execute(to);
+		Account returnAccount = (Account) ServerExecutor.execute(to);
 
 		return returnAccount;
 	}
 
-	public TestAccount getAccount2(TestAccount account, TestAccount account2) {
-		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
-		to.setCalleeMethod("getAccount2");
-		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
-
-		TestAccountWrapper accountWrapper = new TestAccountWrapper(account);
-		to.putWrapper("account", accountWrapper);
-		TestAccountWrapper accountWrapper2 = new TestAccountWrapper(account2);
-		to.putWrapper("account2", accountWrapper2);
-
-		accountWrapper = (TestAccountWrapper) ServerExecutor.execute(to);
-		
-		if(accountWrapper != null){
-			TestAccount returnAccount = accountWrapper.getAccount();
-			return returnAccount;
-		}else{
-			return null;
-		}
-	}
-
-
-	public List<TestAccount> getAccountList(List<TestAccount> accountList) {
+	public List<Account> getAccountList(List<Account> accountList) {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("getAccountList");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
-		TestAccountListWrapper testAccountListWrapper = new TestAccountListWrapper(accountList);
+		AccountListWrapper testAccountListWrapper = new AccountListWrapper(accountList);
 		to.putWrapper("accountList", testAccountListWrapper);
-		testAccountListWrapper = (TestAccountListWrapper) ServerExecutor.execute(to);
+		testAccountListWrapper = (AccountListWrapper) ServerExecutor.execute(to);
 
 		if(testAccountListWrapper != null){
-			List<TestAccount> retaccountList = testAccountListWrapper.getTestAccountList();
+			List<Account> retaccountList = testAccountListWrapper.getTestAccountList();
 			return retaccountList;
 		}else{
 			return null;
 		}
 	}
 	
-	public Map<String, TestAccount> getAccountMap(Map<String, TestAccount> accountMap) {
+	public Map<String, Account> getAccountMap(Map<String, Account> accountMap) {
 		MappedTransferObject to = transferObjectFactory.createMappedTransferObject();
 		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
 		to.setCalleeMethod("getAccountMap");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
-		TestAccountMapWrapper testAccountMapWrapper = new TestAccountMapWrapper(accountMap);
+		AccountMapWrapper testAccountMapWrapper = new AccountMapWrapper(accountMap);
 		to.putWrapper("accountMap", testAccountMapWrapper);
-		testAccountMapWrapper = (TestAccountMapWrapper) ServerExecutor.execute(to);
+		testAccountMapWrapper = (AccountMapWrapper) ServerExecutor.execute(to);
 
 		if(testAccountMapWrapper != null){
-			Map<String, TestAccount> retaccountMap = testAccountMapWrapper.getTestAccountMap();
+			Map<String, Account> retaccountMap = testAccountMapWrapper.getTestAccountMap();
 			return retaccountMap;
 		}else{
 			return null;

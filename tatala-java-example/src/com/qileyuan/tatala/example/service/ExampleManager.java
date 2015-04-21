@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 
 
 /**
@@ -14,15 +14,14 @@ import com.qileyuan.tatala.example.service.model.TestAccount;
  * @author JimT
  *
  */
-public interface TestManager {
+public interface ExampleManager {
 	public String sayHello(int Id, String name);
 	public void doSomething();
-	public void callServer(int Id);
-	public TestAccount getAccount(TestAccount account);
-	public TestAccount getAccount2(TestAccount account, TestAccount account2);
-	public List<TestAccount> getAccountList(List<TestAccount> accountList);
-	public Map<String, TestAccount> getAccountMap(Map<String, TestAccount> accountMap);
-	public Set<TestAccount> getAccountSet(Set<TestAccount> accountSet);
+	public void exceptionCall(int Id);
+	public Account getAccount(Account account);
+	public List<Account> getAccountList(List<Account> accountList);
+	public Map<String, Account> getAccountMap(Map<String, Account> accountMap);
+	public Set<Account> getAccountSet(Set<Account> accountSet);
 	public AllTypeBean getAllTypeBean(boolean aboolean, byte abyte, short ashort, char achar, int aint, long along, 
 			float afloat, double adouble, Date adate, String astring);
 	public String[] getArray(byte[] bytearr, String[] strarr);

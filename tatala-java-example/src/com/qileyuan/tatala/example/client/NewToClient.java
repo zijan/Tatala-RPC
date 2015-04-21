@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.proxy.NewToClientProxy;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 
 /**
  * This class is a sample for client.
@@ -54,7 +54,7 @@ public class NewToClient {
 	}
 	
 	public static void compressTest() {
-		TestAccount account = new TestAccount();
+		Account account = new Account();
 		account.setId(1000);
 		String str = "";
 		for (int i = 0; i < 50; i++) {

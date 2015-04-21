@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.proxy.TestClientProxy;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 
 /**
  * This class is a sample for client.
@@ -32,7 +32,7 @@ public class TestClient implements Runnable{
 	static Logger log = Logger.getLogger(TestClient.class);
 	static TestClientProxy manager = new TestClientProxy();
 	
-	static int sId = 1;
+	static int sId = -1;
 	
 	public TestClient() {
 	}
@@ -68,7 +68,7 @@ public class TestClient implements Runnable{
 			manager.doSomething();
 
 			//object parameter, object return testing
-			TestAccount account = new TestAccount();
+			Account account = new Account();
 			account.setId(1000);
 			account.setName("JimT");
 			account = manager.getAccount(account);
@@ -96,10 +96,10 @@ public class TestClient implements Runnable{
 			}
 			
 			//list parameter, list return testing
-			account = new TestAccount();
-			List<TestAccount> accountList = new ArrayList<TestAccount>();
+			account = new Account();
+			List<Account> accountList = new ArrayList<Account>();
 			for(int i=0; i<3; i++){
-				account = new TestAccount();
+				account = new Account();
 				account.setId(i);
 				accountList.add(account);
 			}
@@ -107,27 +107,18 @@ public class TestClient implements Runnable{
 			log.debug("accountList: "+accountList);
 			
 			//map parameter, map return testing
-			Map<String, TestAccount> accountMap = new HashMap<String, TestAccount>();
+			Map<String, Account> accountMap = new HashMap<String, Account>();
 			for(int i=0; i<3; i++){
-				account = new TestAccount();
+				account = new Account();
 				account.setId(i);
 				accountMap.put("Key"+i, account);
 			}
 			accountMap = manager.getAccountMap(accountMap);
 			log.debug("accountMap: "+accountMap);
-			
-			//more than one object parameter, object return testing
-			TestAccount accountt = new TestAccount();
-			accountt.setId(1000);
-			TestAccount accountt2 = new TestAccount();
-			accountt2.setName("Tang");
-			accountt2.setAddress("Toronto");
-			account = manager.getAccount2(accountt, accountt2);
-			log.debug(account);
-			
+
 			//int parameter, void return testing, Tatala return exception
-			log.debug("callServer sId: " + sId);
-			manager.callServer(sId++);
+			log.debug("exceptionCall Id: " + -1);
+			manager.exceptionCall(-1);
 			
 			/*
 			synchronized (manager) {

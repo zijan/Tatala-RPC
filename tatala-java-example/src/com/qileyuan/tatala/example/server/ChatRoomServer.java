@@ -19,6 +19,7 @@ public class ChatRoomServer {
 		server.start();
 		
 		ChatRoomServerLogic serverLogic = ChatRoomServerLogic.getInstance();
+		//chat room server logic need session map from AioSocketServer
 		serverLogic.setSessionMap(AioSocketServer.getSessionMap());
 	}
 	

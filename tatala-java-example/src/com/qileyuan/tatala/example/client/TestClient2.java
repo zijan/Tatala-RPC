@@ -3,7 +3,7 @@ package com.qileyuan.tatala.example.client;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.proxy.TestClientProxy;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.Account;
 
 /**
  * This class is a sample for client, 
@@ -29,7 +29,7 @@ public class TestClient2 {
 		long l = System.currentTimeMillis();
 
 		l = System.currentTimeMillis();
-		TestAccount account = new TestAccount();
+		Account account = new Account();
 		account.setId(1000);
 		String str = "";
 		for (int i = 0; i < 50; i++) {
@@ -39,7 +39,7 @@ public class TestClient2 {
 		account = manager.getAccount(account);
 		log.debug(account);
 
-		account = new TestAccount();
+		account = new Account();
 		account.setId(1000);
 		str = "";
 		for (int i = 0; i < 50; i++) {
@@ -56,7 +56,7 @@ public class TestClient2 {
 		long l = System.currentTimeMillis();
 
 		l = System.currentTimeMillis();
-		TestAccount account = new TestAccount();
+		Account account = new Account();
 		account.setId(1000);
 		account.setName("...Asynchronous Test...");
 		account = manager.getAccountAsynchronous(account);
@@ -69,7 +69,7 @@ public class TestClient2 {
 		long l = System.currentTimeMillis();
 
 		l = System.currentTimeMillis();
-		TestAccount account = new TestAccount();
+		Account account = new Account();
 		account.setId(1000);
 		account.setName("...Default Proxy Test...");
 		account = manager.getAccountDefaultProxy(account);
@@ -82,7 +82,7 @@ public class TestClient2 {
 		long l = System.currentTimeMillis();
 
 		l = System.currentTimeMillis();
-		TestAccount account = new TestAccount();
+		Account account = new Account();
 		account.setId(1000);
 		account.setName("...Serializable Test...");
 		account = manager.getAccountSerializable(account);

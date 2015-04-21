@@ -3,15 +3,16 @@ package com.qileyuan.tatala.example.proxy;
 import java.util.List;
 import java.util.Map;
 
-import com.qileyuan.tatala.example.proxy.wrapper.AllTypeBeanWrapper;
-import com.qileyuan.tatala.example.proxy.wrapper.TestAccountListWrapper;
-import com.qileyuan.tatala.example.proxy.wrapper.TestAccountMapWrapper;
-import com.qileyuan.tatala.example.proxy.wrapper.TestAccountWrapper;
-import com.qileyuan.tatala.example.service.TestManager;
-import com.qileyuan.tatala.example.service.TestManagerImpl;
+import com.qileyuan.tatala.example.service.ExampleManager;
+import com.qileyuan.tatala.example.service.ExampleManagerImpl;
+import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.TestAccount;
+import com.qileyuan.tatala.example.service.model.wrapper.AccountListWrapper;
+import com.qileyuan.tatala.example.service.model.wrapper.AccountMapWrapper;
+import com.qileyuan.tatala.example.service.model.wrapper.AccountWrapper;
+import com.qileyuan.tatala.example.service.model.wrapper.AllTypeBeanWrapper;
 import com.qileyuan.tatala.socket.to.MappedTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -29,7 +30,7 @@ import com.qileyuan.tatala.socket.to.TransferObject;
  */
 public class TestServerProxy {
 
-	private TestManager manager = new TestManagerImpl();
+	private ExampleManager manager = new ExampleManagerImpl();
 
 	public String sayHello(TransferObject baseto) {
 		MappedTransferObject to = (MappedTransferObject)baseto;
@@ -44,17 +45,17 @@ public class TestServerProxy {
 		manager.doSomething();
 	}
 	
-	public void callServer(TransferObject baseto) {
+	public void exceptionCall(TransferObject baseto) {
 		MappedTransferObject to = (MappedTransferObject)baseto;
 		int Id = to.getInt("Id");
-		manager.callServer(Id);
+		manager.exceptionCall(Id);
 	}
 
-	public TestAccountWrapper getAccount(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		TestAccountWrapper accountWrapper = (TestAccountWrapper) to.getWrapper("account");
-		TestAccount account = accountWrapper.getAccount();
-		TestAccount returnAccount = manager.getAccount(account);
+	public AccountWrapper getAccount(TransferObject baseto) {
+		OrderedTransferObject to = (OrderedTransferObject)baseto;
+		AccountWrapper accountWrapper = (AccountWrapper) to.getWrapper();
+		Account account = accountWrapper.getAccount();
+		Account returnAccount = manager.getAccount(account);
 		accountWrapper.setAccount(returnAccount);
 
 		// server side can be specific to return compress data or not.
@@ -63,41 +64,29 @@ public class TestServerProxy {
 		return accountWrapper;
 	}
 
-	public TestAccount getAccountSerializable(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		TestAccount account = (TestAccount) to.getSerializable("account");
-		TestAccount returnAccount = manager.getAccount(account);
+	public Account getAccountSerializable(TransferObject baseto) {
+		OrderedTransferObject to = (OrderedTransferObject)baseto;
+		Account account = (Account) to.getSerializable();
+		Account returnAccount = manager.getAccount(account);
 		return returnAccount;
 	}
 
-	public TestAccountWrapper getAccount2(TransferObject baseto) {
+	public AccountListWrapper getAccountList(TransferObject baseto) {
 		MappedTransferObject to = (MappedTransferObject)baseto;
-		TestAccountWrapper accountWrapper = (TestAccountWrapper) to.getWrapper("account");
-		TestAccount account = accountWrapper.getAccount();
-		TestAccountWrapper accountWrapper2 = (TestAccountWrapper) to.getWrapper("account2");
-		TestAccount account2 = accountWrapper2.getAccount();
-
-		TestAccount returnAccount = manager.getAccount2(account, account2);
-		accountWrapper.setAccount(returnAccount);
-		return accountWrapper;
-	}
-
-	public TestAccountListWrapper getAccountList(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		TestAccountListWrapper testAccountListWrapper = (TestAccountListWrapper) to.getWrapper("accountList");
-		List<TestAccount> accountList = testAccountListWrapper.getTestAccountList();
+		AccountListWrapper testAccountListWrapper = (AccountListWrapper) to.getWrapper("accountList");
+		List<Account> accountList = testAccountListWrapper.getTestAccountList();
 		accountList = manager.getAccountList(accountList);
-		testAccountListWrapper = new TestAccountListWrapper(accountList);
+		testAccountListWrapper = new AccountListWrapper(accountList);
 
 		return testAccountListWrapper;
 	}
 
-	public TestAccountMapWrapper getAccountMap(TransferObject baseto) {
+	public AccountMapWrapper getAccountMap(TransferObject baseto) {
 		MappedTransferObject to = (MappedTransferObject)baseto;
-		TestAccountMapWrapper testAccountMapWrapper = (TestAccountMapWrapper) to.getWrapper("accountMap");
-		Map<String, TestAccount> accountMap = testAccountMapWrapper.getTestAccountMap();
+		AccountMapWrapper testAccountMapWrapper = (AccountMapWrapper) to.getWrapper("accountMap");
+		Map<String, Account> accountMap = testAccountMapWrapper.getTestAccountMap();
 		accountMap = manager.getAccountMap(accountMap);
-		testAccountMapWrapper = new TestAccountMapWrapper(accountMap);
+		testAccountMapWrapper = new AccountMapWrapper(accountMap);
 
 		return testAccountMapWrapper;
 	}

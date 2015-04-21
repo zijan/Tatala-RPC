@@ -2,24 +2,25 @@ package com.qileyuan.tatala.example.server;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.proxy.TestDefaultProxy;
+import com.qileyuan.tatala.example.proxy.ExampleDefaultProxy;
 import com.qileyuan.tatala.proxy.DefaultProxy;
 import com.qileyuan.tatala.socket.server.AioSocketServer;
 
-public class TestServer {
-	static Logger log = Logger.getLogger(TestServer.class);
+public class ExampleServer {
+	static Logger log = Logger.getLogger(ExampleServer.class);
 	
 	public static void initialize(){
-		log.info("Test Socket Server initialize...");
+		log.info("Example Tatala Server initialize...");
 	}
 	
 	public static void startup(int listenPort, int poolSize){
-		log.info("Test Socket Server starting...");
+		log.info("Example Tatala Server starting...");
 		
 		AioSocketServer server = new AioSocketServer(listenPort, poolSize);
 		
 		try {
-			DefaultProxy defaultProxy = new TestDefaultProxy();
+			//set default proxy or callee class here
+			DefaultProxy defaultProxy = new ExampleDefaultProxy();
 			server.registerProxy(defaultProxy);
 			server.start();
 		} catch (Exception e) {
@@ -28,7 +29,7 @@ public class TestServer {
 	}
 	
 	public static void main(String args[]) {
-		log.info("*** Test Socket Server ***");
+		log.info("*** Example Tatala Server ***");
 		int listenPort = 10001;
 		int poolSize = 16;
 		if(args != null && args.length > 1){
