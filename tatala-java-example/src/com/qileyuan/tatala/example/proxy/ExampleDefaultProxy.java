@@ -4,7 +4,6 @@ import com.qileyuan.tatala.example.service.ExampleManager;
 import com.qileyuan.tatala.example.service.ExampleManagerImpl;
 import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
-import com.qileyuan.tatala.example.service.model.wrapper.AccountWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AllTypeBeanWrapper;
 import com.qileyuan.tatala.proxy.DefaultProxy;
 import com.qileyuan.tatala.socket.to.OrderedTransferObject;
@@ -33,12 +32,10 @@ public class ExampleDefaultProxy extends DefaultProxy{
 			manager.doSomething();
 			
 		}else if(calleeMethod.equals("getAccount")){
-			AccountWrapper accountWrapper = (AccountWrapper) to.getWrapper();
-			Account account = accountWrapper.getAccount();
+			Account account = (Account) to.getSerializable();
 			//call real service code
 			Account returnAccount = manager.getAccount(account);
-			accountWrapper.setAccount(returnAccount);
-			return accountWrapper;
+			return returnAccount;
 			
 		}else if(calleeMethod.equals("getAllTypeBean")){
 			AllTypeBean allTypeBean = manager.getAllTypeBean(

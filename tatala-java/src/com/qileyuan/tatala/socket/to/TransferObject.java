@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.Date;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
@@ -26,7 +27,6 @@ public abstract class TransferObject {
 	public static final byte COMPRESS_FLAG = 1;
 	public static final byte SERVERCALL_FLAG = 1 << 1;
 	public static final byte DEFAULTCALLEE_FLAG = 1 << 2;
-	public static final byte MAPPEDVERSION_FLAG = 1 << 3;
 	
 	public static final byte DATATYPE_VOID = 0;
 	public static final byte DATATYPE_NULL = 1;
@@ -65,7 +65,6 @@ public abstract class TransferObject {
 	protected long clientId;
 	protected boolean serverCall;
 	protected boolean defaultCallee;
-	protected boolean mappedVersion;
 	protected DefaultProxy serverCallProxy;
 	
 	protected byte returnType;
@@ -142,14 +141,6 @@ public abstract class TransferObject {
 		this.defaultCallee = defaultCallee;
 	}
 
-	public boolean isMappedVersion() {
-		return mappedVersion;
-	}
-
-	public void setMappedVersion(boolean mappedVersion) {
-		this.mappedVersion = mappedVersion;
-	}
-
 	public DefaultProxy getServerCallProxy() {
 		return serverCallProxy;
 	}
@@ -158,7 +149,49 @@ public abstract class TransferObject {
 		this.serverCallProxy = serverCallProxy;
 	}
 	
+	public abstract int paramSize();
+	public abstract Object peek(int index);
+	public abstract void putBoolean(boolean value);
+	public abstract Boolean getBoolean();
+	public abstract void putByte(byte value);
+	public abstract Byte getByte();
+	public abstract void putShort(short value);
+	public abstract Short getShort();
+	public abstract void putChar(char value);
+	public abstract Character getChar();
+	public abstract void putInt(int value);
+	public abstract Integer getInt();
+	public abstract void putLong(long value);
+	public abstract Long getLong();
+	public abstract void putFloat(float value);
+	public abstract Float getFloat();
+	public abstract void putDouble(double value);
+	public abstract Double getDouble();
+	public abstract void putDate(Date value);
+	public abstract Date getDate();
+	public abstract void putString(String value);
+	public abstract String getString();
+	public abstract void putByteArray(byte[] value);
+	public abstract byte[] getByteArray();
+	public abstract void putIntArray(int[] value);
+	public abstract int[] getIntArray();
+	public abstract void putLongArray(long[] value);
+	public abstract long[] getLongArray();
+	public abstract void putFloatArray(float[] value);
+	public abstract float[] getFloatArray();
+	public abstract void putDoubleArray(double[] value);
+	public abstract double[] getDoubleArray();
+	public abstract void putStringArray(String[] value);
+	public abstract String[] getStringArray();
+	public abstract void putSerializable(Serializable value);
+	public abstract Serializable getSerializable();
+	public abstract void putWrapper(TransferObjectWrapper value);
+	public abstract TransferObjectWrapper getWrapper();
+	
 	public abstract byte[] getByteData() throws IOException;
+	
+	// server call
+	public abstract void setByteData(byte[] buf) throws SocketExecuteException;
 
 	public void convertInputStream(InputStream is) throws IOException, SocketExecuteException {
 		// get byte array length
@@ -170,9 +203,6 @@ public abstract class TransferObject {
 		
 		setByteData(buf);
 	}
-	
-	// server call
-	public abstract void setByteData(byte[] buf) throws SocketExecuteException;
 
 	// server call
 	public byte[] getReturnByteArray(Object retobj) throws IOException {

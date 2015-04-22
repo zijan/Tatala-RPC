@@ -11,8 +11,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.service.ExampleManager;
-import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.Account;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.proxy.ClientProxyFactory;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 

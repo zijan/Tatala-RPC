@@ -10,7 +10,6 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.executor.ServerExecutor;
-import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
@@ -33,7 +32,7 @@ public class ClientProxy implements InvocationHandler {
 	
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-		OrderedTransferObject to = transferObjectFactory.createTransferObject();
+		TransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeClass(SERVER_PROXY);
 		

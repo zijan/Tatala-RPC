@@ -2,8 +2,8 @@ package com.qileyuan.tatala.example.proxy;
 
 import com.qileyuan.tatala.example.service.ExampleManager;
 import com.qileyuan.tatala.example.service.ExampleManagerImpl;
-import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.Account;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 

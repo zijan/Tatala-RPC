@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 import com.qileyuan.tatala.proxy.DefaultProxy;
 import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
-import com.qileyuan.tatala.socket.to.MappedTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.TransferUtil;
 
@@ -202,7 +202,7 @@ public class LongClientSession{
 	}
 
 	private void handleServerCall(byte[] receiveData){
-		TransferObject to = new MappedTransferObject();
+		TransferObject to = new OrderedTransferObject();
         try {
 	        to = TransferUtil.byteArrayToTransferObject(receiveData);
 			execute(to);

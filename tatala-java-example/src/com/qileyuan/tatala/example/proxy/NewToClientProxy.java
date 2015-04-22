@@ -2,10 +2,9 @@ package com.qileyuan.tatala.example.proxy;
 
 import java.util.Date;
 
-import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.Account;
+import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.executor.ServerExecutor;
-import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
@@ -24,7 +23,7 @@ public class NewToClientProxy {
 	
 	public String sayHello(int Id, String name) {
 		
-		OrderedTransferObject to = transferObjectFactory.createTransferObject();
+		TransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("sayHello");
 		to.registerReturnType(TransferObject.DATATYPE_STRING);
@@ -39,7 +38,7 @@ public class NewToClientProxy {
 	}
 	
 	public void doSomething() {
-		OrderedTransferObject to = transferObjectFactory.createTransferObject();
+		TransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("doSomething");
 		to.registerReturnType(TransferObject.DATATYPE_VOID);
@@ -51,7 +50,7 @@ public class NewToClientProxy {
 			short ashort, char achar, int aint, long along, float afloat,
 			double adouble, Date adate, String astring){
 		
-		OrderedTransferObject to = transferObjectFactory.createTransferObject();
+		TransferObject to = transferObjectFactory.createTransferObject();
 		
 		to.setCalleeMethod("allTypeTest");
 		to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
@@ -72,7 +71,7 @@ public class NewToClientProxy {
 	
 	public String[] getArray(byte[] bytearr, String[] strarr) {
 
-		OrderedTransferObject to = transferObjectFactory.createTransferObject();
+		TransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("getArray");
 		to.registerReturnType(TransferObject.DATATYPE_STRINGARRAY);
@@ -87,7 +86,7 @@ public class NewToClientProxy {
 	}
 	
 	public Account getAccountCompress(Account account) {
-		OrderedTransferObject to = transferObjectFactory.createTransferObject();
+		TransferObject to = transferObjectFactory.createTransferObject();
 
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);

@@ -11,8 +11,6 @@ import com.qileyuan.tatala.example.service.model.wrapper.AccountListWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountMapWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AllTypeBeanWrapper;
-import com.qileyuan.tatala.socket.to.MappedTransferObject;
-import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -32,27 +30,24 @@ public class TestServerProxy {
 
 	private ExampleManager manager = new ExampleManagerImpl();
 
-	public String sayHello(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		int Id = to.getInt("Id");
-		String name = to.getString("name");
+	public String sayHello(TransferObject to) {
+		int Id = to.getInt();
+		String name = to.getString();
 
 		String result = manager.sayHello(Id, name);
 		return result;
 	}
 
-	public void doSomething(TransferObject baseto) {
+	public void doSomething(TransferObject to) {
 		manager.doSomething();
 	}
 	
-	public void exceptionCall(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		int Id = to.getInt("Id");
+	public void exceptionCall(TransferObject to) {
+		int Id = to.getInt();
 		manager.exceptionCall(Id);
 	}
 
-	public AccountWrapper getAccount(TransferObject baseto) {
-		OrderedTransferObject to = (OrderedTransferObject)baseto;
+	public AccountWrapper getAccount(TransferObject to) {
 		AccountWrapper accountWrapper = (AccountWrapper) to.getWrapper();
 		Account account = accountWrapper.getAccount();
 		Account returnAccount = manager.getAccount(account);
@@ -64,16 +59,14 @@ public class TestServerProxy {
 		return accountWrapper;
 	}
 
-	public Account getAccountSerializable(TransferObject baseto) {
-		OrderedTransferObject to = (OrderedTransferObject)baseto;
+	public Account getAccountSerializable(TransferObject to) {
 		Account account = (Account) to.getSerializable();
 		Account returnAccount = manager.getAccount(account);
 		return returnAccount;
 	}
 
-	public AccountListWrapper getAccountList(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		AccountListWrapper testAccountListWrapper = (AccountListWrapper) to.getWrapper("accountList");
+	public AccountListWrapper getAccountList(TransferObject to) {
+		AccountListWrapper testAccountListWrapper = (AccountListWrapper) to.getWrapper();
 		List<Account> accountList = testAccountListWrapper.getTestAccountList();
 		accountList = manager.getAccountList(accountList);
 		testAccountListWrapper = new AccountListWrapper(accountList);
@@ -81,9 +74,8 @@ public class TestServerProxy {
 		return testAccountListWrapper;
 	}
 
-	public AccountMapWrapper getAccountMap(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		AccountMapWrapper testAccountMapWrapper = (AccountMapWrapper) to.getWrapper("accountMap");
+	public AccountMapWrapper getAccountMap(TransferObject to) {
+		AccountMapWrapper testAccountMapWrapper = (AccountMapWrapper) to.getWrapper();
 		Map<String, Account> accountMap = testAccountMapWrapper.getTestAccountMap();
 		accountMap = manager.getAccountMap(accountMap);
 		testAccountMapWrapper = new AccountMapWrapper(accountMap);
@@ -91,23 +83,21 @@ public class TestServerProxy {
 		return testAccountMapWrapper;
 	}
 	
-	public AllTypeBeanWrapper getAllTypeBean(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
+	public AllTypeBeanWrapper getAllTypeBean(TransferObject to) {
 		AllTypeBean allTypeBean = manager.getAllTypeBean(
-				to.getBoolean("aboolean"), to.getByte("abyte"),
-				to.getShort("ashort"), to.getChar("achar"), to.getInt("aint"),
-				to.getLong("along"), to.getFloat("afloat"),
-				to.getDouble("adouble"), to.getDate("adate"),
-				to.getString("astring"));
+				to.getBoolean(), to.getByte(),
+				to.getShort(), to.getChar(), to.getInt(),
+				to.getLong(), to.getFloat(),
+				to.getDouble(), to.getDate(),
+				to.getString());
 
 		AllTypeBeanWrapper allTypeBeanWrapper = new AllTypeBeanWrapper(allTypeBean);
 		return allTypeBeanWrapper;
 	}
 
-	public String[] getArray(TransferObject baseto) {
-		MappedTransferObject to = (MappedTransferObject)baseto;
-		byte[] bytearr = to.getByteArray("bytearr");
-		String[] strarr = to.getStringArray("strarr");
+	public String[] getArray(TransferObject to) {
+		byte[] bytearr = to.getByteArray();
+		String[] strarr = to.getStringArray();
 
 		String[] result = manager.getArray(bytearr, strarr);
 		return result;

@@ -48,27 +48,14 @@ public class TransferObjectFactory {
 		this.compress = compress;
 	}
 	
-	public OrderedTransferObject createTransferObject(){
-		OrderedTransferObject to = new OrderedTransferObject();
+	public TransferObject createTransferObject(){
+		TransferObject to = new OrderedTransferObject();
 		to.setConnection(connection);
 		to.setServerCallProxy(serverCallProxy);
 		if(calleeClass != null){
 			to.setCalleeClass(calleeClass);
 		}
 		to.setCompress(compress);
-		return to;
-	}
-	
-	@Deprecated
-	public MappedTransferObject createMappedTransferObject(){
-		MappedTransferObject to = new MappedTransferObject();
-		to.setConnection(connection);
-		to.setServerCallProxy(serverCallProxy);
-		if(calleeClass != null){
-			to.setCalleeClass(calleeClass);
-		}
-		to.setCompress(compress);
-		to.setMappedVersion(true);
 		return to;
 	}
 }
