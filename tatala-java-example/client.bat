@@ -7,4 +7,4 @@ set classpath=%classpath%;lib\tatala.jar
 set classpath=%classpath%;dist\tatala-java-example.jar
 set classpath=%classpath%;cfg
 
-java com.qileyuan.tatala.example.client.TestClient 
+java com.qileyuan.tatala.example.client.ExampleClient 

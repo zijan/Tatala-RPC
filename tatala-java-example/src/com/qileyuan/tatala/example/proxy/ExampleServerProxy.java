@@ -26,7 +26,7 @@ import com.qileyuan.tatala.socket.to.TransferObject;
  * @author JimT
  * 
  */
-public class TestServerProxy {
+public class ExampleServerProxy {
 
 	private ExampleManager manager = new ExampleManagerImpl();
 

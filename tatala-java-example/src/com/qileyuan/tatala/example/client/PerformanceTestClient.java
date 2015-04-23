@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.example.proxy.TestClientProxy;
+import com.qileyuan.tatala.example.proxy.ExampleClientProxy;
 import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 
@@ -24,17 +24,17 @@ import com.qileyuan.tatala.example.service.model.AllTypeBean;
  * n(800) t(100) e(0) time: 62064(ms) 1289*8/s
  *
  */
-public class TestClient implements Runnable{
+public class PerformanceTestClient implements Runnable{
 
-	static int numThread = 1; //100;
-	static int times = 1; //100;
+	static int numThread = 100;
+	static int times = 100;
 
-	static Logger log = Logger.getLogger(TestClient.class);
-	static TestClientProxy manager = new TestClientProxy();
+	static Logger log = Logger.getLogger(PerformanceTestClient.class);
+	static ExampleClientProxy proxy = new ExampleClientProxy();
 	
 	static int sId = -1;
 	
-	public TestClient() {
+	public PerformanceTestClient() {
 	}
 	
 	public static void main(String[] args) {
@@ -61,23 +61,30 @@ public class TestClient implements Runnable{
 			//int, String and return String testing
 			int Id = 18;
 			String name = "JimT";
-			String result = manager.sayHello(Id, name);
-			log.debug("result: "+result);
+			String result = proxy.sayHello(Id, name);
+			//log.debug("result: "+result);
 			
 			//no parameter, void return testing
-			manager.doSomething();
+			proxy.doSomething();
 
 			//object parameter, object return testing
 			Account account = new Account();
 			account.setId(1000);
 			account.setName("JimT");
-			account = manager.getAccount(account);
-			log.debug(account);
+			account = proxy.getAccount(account);
+			//log.debug(account);
+			
+			//Serializable object parameter, object return testing
+			account = new Account();
+			account.setId(1000);
+			account.setName("JimT");
+			account = proxy.getAccountSerializable(account);
+			//log.debug(account);
 			
 			//all primitive type parameter, object return testing
-			AllTypeBean allTypeBean = manager.getAllTypeBean(true, (byte)1, (short)2, 'T', 3, 
+			AllTypeBean allTypeBean = proxy.getAllTypeBean(true, (byte)1, (short)2, 'T', 3, 
 					(long)4, 5.5f, 6.66d, new Date(), "Hello JimT!");
-			log.debug("allTypeBean: "+allTypeBean);
+			//log.debug("allTypeBean: "+allTypeBean);
 			
 			//int string array parameter, string array return
 			byte[] bytearr = new byte[3];
@@ -88,10 +95,10 @@ public class TestClient implements Runnable{
 			strarr[0] = "Jim ";
 			strarr[1] = "Tang ";
 			strarr[2] = "Toronto ";
-			strarr = manager.getArray(bytearr, strarr);
+			strarr = proxy.getArray(bytearr, strarr);
 			if(strarr != null){
 				for (int i = 0; i < strarr.length; i++) {
-					log.debug("strarr: "+strarr[i]);
+					//log.debug("strarr: "+strarr[i]);
 				}
 			}
 			
@@ -103,8 +110,8 @@ public class TestClient implements Runnable{
 				account.setId(i);
 				accountList.add(account);
 			}
-			accountList = manager.getAccountList(accountList);
-			log.debug("accountList: "+accountList);
+			accountList = proxy.getAccountList(accountList);
+			//log.debug("accountList: "+accountList);
 			
 			//map parameter, map return testing
 			Map<String, Account> accountMap = new HashMap<String, Account>();
@@ -113,19 +120,8 @@ public class TestClient implements Runnable{
 				account.setId(i);
 				accountMap.put("Key"+i, account);
 			}
-			accountMap = manager.getAccountMap(accountMap);
-			log.debug("accountMap: "+accountMap);
-
-			//int parameter, void return testing, Tatala return exception
-			log.debug("exceptionCall Id: " + -1);
-			manager.exceptionCall(-1);
-			
-			/*
-			synchronized (manager) {
-				log.debug("callServer sId: " + sId);
-				manager.callServer(sId++);
-			}
-			*/
+			accountMap = proxy.getAccountMap(accountMap);
+			//log.debug("accountMap: "+accountMap);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -136,7 +132,7 @@ public class TestClient implements Runnable{
 	 * single thread test
 	 */
 	public static void singleTest(){
-		TestClient tc = new TestClient();
+		PerformanceTestClient tc = new PerformanceTestClient();
 		for (int i = 0; i < times; i++) {
 			tc.remoteTest();
 		}
@@ -148,7 +144,7 @@ public class TestClient implements Runnable{
 	public static void multipleTest(){
 		ExecutorService exec = Executors.newCachedThreadPool();
         for (int i = 0; i < numThread; i++) {
-        	TestClient testClient = new TestClient();
+        	PerformanceTestClient testClient = new PerformanceTestClient();
             exec.execute(testClient);
         }
         
@@ -164,11 +160,11 @@ public class TestClient implements Runnable{
 	}
 	
 	public static void connect(){
-		TestClient tc = new TestClient();
+		PerformanceTestClient tc = new PerformanceTestClient();
 		tc.doConnect();
 	}
 	
 	public void doConnect(){
-		manager.sayHello(1, "connect");
+		proxy.sayHello(1, "connect");
 	}
 }

@@ -30,7 +30,7 @@ import com.qileyuan.tatala.socket.to.TransferObjectFactory;
  * @author JimT
  * 
  */
-public class TestClientProxy {
+public class ExampleClientProxy {
 
 	private String IP = "127.0.0.1";
 	private int PORT = 10001;
@@ -38,14 +38,14 @@ public class TestClientProxy {
 	
 	private TransferObjectFactory transferObjectFactory;
 
-	public TestClientProxy(){
+	public ExampleClientProxy(){
 		//create long connection factory
 		transferObjectFactory = new TransferObjectFactory(IP, PORT, TIMEOUT);
 	}
 	
 	public String sayHello(int Id, String name) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("sayHello");
 		to.registerReturnType(TransferObject.DATATYPE_STRING);
 
@@ -60,7 +60,7 @@ public class TestClientProxy {
 		
 	public void doSomething() {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("doSomething");
 		to.registerReturnType(TransferObject.DATATYPE_VOID);
 
@@ -69,7 +69,7 @@ public class TestClientProxy {
 	
 	public void exceptionCall(int Id) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("exceptionCall");
 		to.putInt(Id);
 		to.registerReturnType(TransferObject.DATATYPE_VOID);
@@ -79,13 +79,12 @@ public class TestClientProxy {
 
 	public Account getAccount(Account account) throws Exception {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
 		AccountWrapper accountWrapper = new AccountWrapper(account);
 		to.putWrapper(accountWrapper);
-		//to.setLongConnection(true);
 
 		accountWrapper = (AccountWrapper) ServerExecutor.execute(to);
 
@@ -100,7 +99,7 @@ public class TestClientProxy {
 	@SuppressWarnings("unchecked")
 	public Account getAccountAsynchronous(Account account) throws Exception {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
@@ -119,7 +118,7 @@ public class TestClientProxy {
 
 	public Account getAccountCompress(Account account) throws Exception {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAccount");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
@@ -155,7 +154,7 @@ public class TestClientProxy {
 
 	public Account getAccountSerializable(Account account) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAccountSerializable");
 		to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
 		to.putSerializable(account);
@@ -167,7 +166,7 @@ public class TestClientProxy {
 
 	public List<Account> getAccountList(List<Account> accountList) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAccountList");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
@@ -185,7 +184,7 @@ public class TestClientProxy {
 	
 	public Map<String, Account> getAccountMap(Map<String, Account> accountMap) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAccountMap");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
@@ -205,7 +204,7 @@ public class TestClientProxy {
 			short ashort, char achar, int aint, long along, float afloat,
 			double adouble, Date adate, String astring) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getAllTypeBean");
 		to.registerReturnType(TransferObject.DATATYPE_WRAPPER);
 
@@ -231,7 +230,7 @@ public class TestClientProxy {
 
 	public String[] getArray(byte[] bytearr, String[] strarr) {
 		TransferObject to = transferObjectFactory.createTransferObject();
-		to.setCalleeClass("com.qileyuan.tatala.example.proxy.TestServerProxy");
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
 		to.setCalleeMethod("getArray");
 		to.registerReturnType(TransferObject.DATATYPE_STRINGARRAY);
 
