@@ -16,16 +16,6 @@ import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.proxy.ClientProxyFactory;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 
-/**
- * This class is a sample for EasyClient.
- * Without server and client proxy sample.
- * @author JimT
- *
- * Long Connect Remote test, client and server at same machine. (n=numThread; t=times; e=error)
- * CPU: i7-3610QM; RAM: 8G; OS: Win7-64
- * n(100) t(100) e(0) time: 7476(ms) 1338*8/s
- *
- */
 public class EasyClient {
 
 	static Logger log = Logger.getLogger(EasyClient.class);

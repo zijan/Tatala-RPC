@@ -14,16 +14,6 @@ import com.qileyuan.tatala.example.proxy.ExampleClientProxy;
 import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 
-/**
- * This class is a sample for client.
- * @author JimT
- *
- * Long Connect Remote test, client and server at same machine. (n=numThread; t=times; e=error)
- * CPU: i7-3610QM; RAM: 8G; OS: Win7-64
- * n(100) t(100) e(0) time: 6498(ms) 1539*8/s
- * n(800) t(100) e(0) time: 62064(ms) 1289*8/s
- *
- */
 public class PerformanceTestClient implements Runnable{
 
 	static int numThread = 100;
@@ -57,7 +47,7 @@ public class PerformanceTestClient implements Runnable{
 	 */
 	public void remoteTest() {
 		try {
-			
+
 			//int, String and return String testing
 			int Id = 18;
 			String name = "JimT";
@@ -73,7 +63,7 @@ public class PerformanceTestClient implements Runnable{
 			account.setName("JimT");
 			account = proxy.getAccount(account);
 			//log.debug(account);
-			
+
 			//Serializable object parameter, object return testing
 			account = new Account();
 			account.setId(1000);
@@ -122,7 +112,14 @@ public class PerformanceTestClient implements Runnable{
 			}
 			accountMap = proxy.getAccountMap(accountMap);
 			//log.debug("accountMap: "+accountMap);
-			
+
+			//Google Protocol Buffer testing
+			account = new Account();
+			account.setId(1000);
+			account.setName("JimT");
+			account = proxy.getAccountProto(account);
+			//log.debug(account);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

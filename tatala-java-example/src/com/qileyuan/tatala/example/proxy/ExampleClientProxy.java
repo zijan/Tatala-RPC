@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
+import com.qileyuan.tatala.example.service.model.proto.AccountProto;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountListWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountMapWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountWrapper;
@@ -241,5 +243,30 @@ public class ExampleClientProxy {
 		String[] result = (String[]) resultObj;
 
 		return result;
+	}
+	
+	public Account getAccountProto (Account account) throws InvalidProtocolBufferException{
+		TransferObject to = transferObjectFactory.createTransferObject();
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
+		to.setCalleeMethod("getAccountProto");
+		to.registerReturnType(TransferObject.DATATYPE_BYTEARRAY);
+
+		AccountProto.Account.Builder accountProtoBuilder = AccountProto.Account.newBuilder();
+		accountProtoBuilder.setId(account.getId());
+		accountProtoBuilder.setName(account.getName());
+		to.putByteArray(accountProtoBuilder.build().toByteArray());
+
+		byte[] returnByteArray = (byte[]) ServerExecutor.execute(to);
+
+		AccountProto.Account accountProto = AccountProto.Account.parseFrom(returnByteArray);
+		if(accountProto != null){
+			Account returnAccount = new Account();
+			returnAccount.setId(accountProto.getId());
+			returnAccount.setName(accountProto.getName());
+			returnAccount.setAddress(accountProto.getAddress());
+			return returnAccount;
+		}else{
+			return null;
+		}
 	}
 }

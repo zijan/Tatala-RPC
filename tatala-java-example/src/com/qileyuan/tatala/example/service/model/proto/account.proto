@@ -1,0 +1,8 @@
+option java_package = "com.qileyuan.tatala.example.service.model.proto";
+option java_outer_classname = "AccountProto";
+
+message Account {
+  required int32 id = 1;
+  required string name = 2;
+  optional string address = 3;
+}
