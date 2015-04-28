@@ -4,7 +4,7 @@
 #### Features
 * Code refactor
 * More easy to code
-* Integrate jetty, support RESTfull call
+* Remove any property file
 * Support protobuf
 
 ## Version 0.1.2 Release Note
