@@ -1,4 +1,4 @@
-# TATALA
+# Tatala RPC
 
 ## Version 0.2.0 Release Note
 * Code refactor
