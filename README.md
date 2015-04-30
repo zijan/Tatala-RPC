@@ -1,18 +1,21 @@
 # TATALA
 
-## Coming version 0.2.x
-#### Features
+## Version 0.2.0 Release Note
 * Code refactor
-* More easy to code
-* Remove any property file
+* Change ServerExecutor socket only
+* Take away retry times
+* Remove short connection
+* Add package for exception
+* Remove any property file (controller.xml & tatala.properties)
+* Change the way of default proxy call
+* Change MappedTransferObject and OrderedTransferObject
+* Fix when clien close, Receive error show up on server side
+* More easy understand example code
 * Support protobuf
 
 ## Version 0.1.2 Release Note
-#### Features
 * Add set on EasyClient
 * Add TatalaReturnException, so let client be able to rollback transaction
-
-#### Bugs Fix
 * fix bugs for List and Map on ServerProxy.java
 * fix for multiple thread, void return method, may disorder on server side
 
@@ -24,15 +27,17 @@ Right now, there are Tatala-Java (client & server) and Tatala-client-csharp avai
 https://github.com/zijan/Tatala/wiki/Tatala-中文教程
 
 ## Features
-* Easy-to-use quickly develop and setup a network component
+* Easy-to-use quickly develop and setup a network communication component
 * Cross language and platform
 * High performance and distributed
 * Binary communication protocol
-* Support long and short socket connection
+* Support long socket connection
 * Support multi thread on both client and server side
 * Support synchronous or asynchronous method call
 * Support compression for big content
 * Support Server push message to client
+* Support Server return runtime exception to clien side, so client be able to rollback transaction
+* Support Google Protocol Buffers as object serializing solution
 * Can use for cross-language RPC, high performance cache server, distributed message service, MMO game server……
 
 ## Get Started
