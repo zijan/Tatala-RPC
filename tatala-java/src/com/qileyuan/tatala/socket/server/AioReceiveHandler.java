@@ -1,5 +1,6 @@
 package com.qileyuan.tatala.socket.server;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.CompletionHandler;
 
@@ -34,7 +35,10 @@ public class AioReceiveHandler implements CompletionHandler<Integer, ServerSessi
 
 	@Override
 	public void failed(Throwable exc, ServerSession session) {
-		log.error("Receive error: " + exc.getMessage());
+		//if client close connection, don't log error
+		if(!IOException.class.isAssignableFrom(exc.getClass())){
+			log.error("Receive error: " + exc.getMessage());
+		}
 		session.close();
 	}
 }

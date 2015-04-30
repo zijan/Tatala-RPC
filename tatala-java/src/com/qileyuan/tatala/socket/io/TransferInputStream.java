@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
-import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.to.TransferObjectWrapper;
 import com.qileyuan.tatala.socket.util.TransferUtil;
 

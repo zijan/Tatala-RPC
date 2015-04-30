@@ -19,17 +19,15 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.SocketExecuteException;
-import com.qileyuan.tatala.socket.TatalaReturnException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.TatalaRollbackException;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.util.NetworkUtil;
 import com.qileyuan.tatala.socket.util.TransferUtil;
-import com.qileyuan.tatala.util.Configuration;
 
 public class ServerSession {
 	Logger log = Logger.getLogger(ServerSession.class);
 	static final int BUFFER_SIZE = 1024;
-	static final int DEFAULT_SERVER_POOL_SIZE = 10;
 	
 	private final ReentrantLock writeLock = new ReentrantLock(); //socket channel write lock
 	//may need not to cache
@@ -52,8 +50,7 @@ public class ServerSession {
 	private List<SessionFilter> sessionFilterList = new ArrayList<SessionFilter>();
 	
 	static{
-		int poolSize = Configuration.getIntProperty("Server.Socket.poolSize", DEFAULT_SERVER_POOL_SIZE);
-		executorService = Executors.newFixedThreadPool(poolSize);
+		executorService = Executors.newCachedThreadPool();
 	}
 	
 	public void start(){
@@ -163,21 +160,18 @@ public class ServerSession {
         try {
 	        to = TransferUtil.byteArrayToTransferObject(receiveData);
 
-	        //only long connection put into session map
-	        if(to.isLongConnection()){
-				//put current session into session map, key is client IP and port
-				long clientId = NetworkUtil.getClientIdBySocketChannel(socketChannel);
-				if(!AioSocketServer.getSessionMap().containsKey(clientId)){
-					AioSocketServer.getSessionMap().put(clientId, this);
-				}
-		        //set clientId to TransferObject
-		        to.setClientId(clientId);
-	        }
+	        //put current session into session map, key is client IP and port
+			long clientId = NetworkUtil.getClientIdBySocketChannel(socketChannel);
+			if(!AioSocketServer.getSessionMap().containsKey(clientId)){
+				AioSocketServer.getSessionMap().put(clientId, this);
+			}
+	        //set clientId to TransferObject
+	        to.setClientId(clientId);
 
 			Object returnObj = execute(to);
 			send(to, returnObj);
 			
-        } catch (TatalaReturnException tre) {
+        } catch (TatalaRollbackException tre) {
 			log.error("Tatala Return Exception: Callee Class and Method: [" + to.getCalleeClass() + "."+ to.getCalleeMethod() + "] e: " + tre, tre);
 			try {
 				to.registerReturnType(TransferObject.DATATYPE_SERIALIZABLE);
@@ -212,7 +206,7 @@ public class ServerSession {
 			}
 			
 			//Check default proxy, don't need reflection.
-			if(calleeClassName.equals(TransferObject.DEFAULT_PROXY)){
+			if(to.isDefaultCallee() || calleeClassName.equals(TransferObject.DEFAULT_PROXY)){
 				if(defaultProxy != null){
 					retobj = defaultProxy.execute(to);
 				}
@@ -239,8 +233,8 @@ public class ServerSession {
 				retobj = meth.invoke(calleeObject, to);
 			}
 		} catch (InvocationTargetException ite) {
-			if(ite.getCause() instanceof TatalaReturnException){
-				TatalaReturnException tre = (TatalaReturnException)ite.getCause();
+			if(ite.getCause() instanceof TatalaRollbackException){
+				TatalaRollbackException tre = (TatalaRollbackException)ite.getCause();
 				throw tre;
 			} else {
 				log.error("Server execute error e: " + ite, ite);

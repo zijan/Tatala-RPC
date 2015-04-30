@@ -46,16 +46,12 @@ public class AioSocketServer {
 
 	public void setUpHandlers() {
 		try {
-			AsynchronousChannelGroup asyncChannelGroup = AsynchronousChannelGroup
-					.withFixedThreadPool(poolSize,Executors.defaultThreadFactory());
-			serverSocketChannel = AsynchronousServerSocketChannel
-					.open(asyncChannelGroup).bind(new InetSocketAddress(listenPort));
+			AsynchronousChannelGroup asyncChannelGroup = AsynchronousChannelGroup.withFixedThreadPool(poolSize, Executors.defaultThreadFactory());
+			serverSocketChannel = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(new InetSocketAddress(listenPort));
 			serverSocketChannel.setOption(StandardSocketOptions.SO_REUSEADDR, true);
-			//serverSocketChannel.setOption(StandardSocketOption.TCP_NODELAY, true);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		log.info("** " + poolSize + " handler thread has been setup! **");
 		log.info("** Socket Server has been startup, listen port is " + listenPort + "! **");
 	}

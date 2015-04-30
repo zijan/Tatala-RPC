@@ -8,11 +8,10 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-import com.qileyuan.tatala.socket.SocketExecuteException;
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.io.TransferInputStream;
 import com.qileyuan.tatala.socket.io.TransferOutputStream;
-import com.qileyuan.tatala.socket.to.NewTransferObject;
-import com.qileyuan.tatala.socket.to.StandardTransferObject;
+import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 import com.qileyuan.tatala.socket.to.TransferObjectWrapper;
 
@@ -231,16 +230,6 @@ public class TransferUtil {
 		if(to.isServerCall()){
 			sendData[0] |= TransferObject.SERVERCALL_FLAG;
 		}
-		
-		//set long connection flag
-        if (to.isLongConnection()) {
-            sendData[0] |= TransferObject.LONGCONNECTION_FLAG;
-        }
-        
-        //set new version flag
-        if (to.isNewVersion()) {
-            sendData[0] |= TransferObject.NEWVERSION_FLAG;
-        }
         
         //if not server call, add tatala flag data at head
         if(!to.isServerCall()){
@@ -262,13 +251,7 @@ public class TransferUtil {
 
 		byte flagbyte = byteArray[0];
 		
-		TransferObject to = null;
-		//check if new version of transfer object
-		if(TransferUtil.isNewVersion(flagbyte)){
-			to = new NewTransferObject();
-		} else {
-			to = new StandardTransferObject();
-		}
+		TransferObject to = new OrderedTransferObject();
 		
 		if (TransferUtil.isCompress(flagbyte)) {
 			toByteArray = TransferUtil.getInputByCompress(toByteArray);
@@ -276,11 +259,6 @@ public class TransferUtil {
 			toByteArray = TransferUtil.getInputByNormal(toByteArray);
 		}
 		to.setByteData(toByteArray);
-		
-		//set long connection flag
-		if(TransferUtil.isLongConnection(flagbyte)){
-			to.setLongConnection(true);
-		}
 		
 		return to;
     }
@@ -386,14 +364,6 @@ public class TransferUtil {
 	
 	public static boolean isServerCall(byte b){
 		return (TransferObject.SERVERCALL_FLAG & b) != 0;
-	}
-	
-	public static boolean isLongConnection(byte b){
-		return (TransferObject.LONGCONNECTION_FLAG & b) != 0;
-	}
-	
-	public static boolean isNewVersion(byte b){
-		return (TransferObject.NEWVERSION_FLAG & b) != 0;
 	}
     
     public static String byteArrayToString(byte[] byteArray){

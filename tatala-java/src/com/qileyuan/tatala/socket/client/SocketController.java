@@ -1,7 +1,5 @@
 package com.qileyuan.tatala.socket.client;
 
-import java.io.InputStream;
-import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,8 +8,6 @@ import java.util.concurrent.ThreadFactory;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.socket.to.TransferObject;
-import com.qileyuan.tatala.util.Configuration;
-import com.thoughtworks.xstream.XStream;
 
 /**
  * This class is the socket connection controller class, which manage the instances of 
@@ -26,11 +22,8 @@ import com.thoughtworks.xstream.XStream;
  */
 public class SocketController {
 	static Logger log = Logger.getLogger(SocketController.class);
-	static final int DEFAULT_CLIENT_POOL_SIZE = 10;
 	
-	private static List<SocketConnection> connectionList;
-	
-	private static ExecutorService executorService;
+	private static ExecutorService executorService = Executors.newCachedThreadPool(new DaemonThreadFactory());
 	
 	private static class DaemonThreadFactory implements ThreadFactory {
 		public Thread newThread(Runnable r) {
@@ -39,59 +32,20 @@ public class SocketController {
 			return t;
 		}
 	}
-	
-	public static List<SocketConnection> getConnectionList(){
-		if(connectionList == null){
-			initialize();
-		}
-		return connectionList;
-	}
-	
-	/**
-	 * Initialize socket server connections through xml configuration file.
-	 */
-	@SuppressWarnings("unchecked")
-	public static void initialize(){
-		
-		XStream xstream = new XStream();
-		xstream.alias("connections", List.class);
-		xstream.alias("connection", SocketConnection.class);
-		
-		InputStream is = SocketController.class.getClassLoader().getResourceAsStream("controller.xml");
-		if(is == null){
-			throw new RuntimeException("Can't find controller.xml");
-		}
-		connectionList = (List<SocketConnection>)xstream.fromXML(is);
 
-		int poolSize = Configuration.getIntProperty("Client.Socket.poolSize", DEFAULT_CLIENT_POOL_SIZE);
-		executorService = Executors.newFixedThreadPool(poolSize, new DaemonThreadFactory());
-	}
-	
 	/**
 	 * Dispatch request to a appointed socket connection.
 	 * @param to TransferObject
 	 * @return Object
 	 */
 	public static Object execute(TransferObject to) {
-		Object retObject = null;
-		
-		if (connectionList == null) {
-			initialize();
+		SocketConnection connection = to.getConnection();
+		if (to.isAsynchronous()) {
+			Worker worker = new Worker(connection, to);
+			return executorService.submit(worker);
+		} else {
+			return connection.execute(to);
 		}
-
-		String connectionName = to.getConnectionName();
-		for (SocketConnection connection : connectionList) {
-			if (connection.getName().equals(connectionName)) {
-				if (to.isAsynchronous()) {
-					Worker worker = new Worker(connection, to);
-					return executorService.submit(worker);
-				} else {
-					return connection.execute(to);
-				}
-			}
-		}
-		
-		return retObject;
 	}
 	
 	static class Worker implements Callable<Object>{
