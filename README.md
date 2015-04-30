@@ -91,9 +91,9 @@ public class EasyClient {
 	}
 }
 ```
-Create TransferObjectFactory object with server ip, port ant timeout, and set implement class name. Create a proxy, make method call. Of cause, client side need have that interface class (ExampleManager.class) and put into classpath. 
+Create TransferObjectFactory object with server ip, port ant timeout, and set implement class name. Create a proxy, make method call. Of cause, client side need have that interface class (ExampleManager.class) in classpath. 
 
-That is everything from server to client codes for a full RPC. Don't have any configuration files. It is so simple, right?
+That is everything from server to client. Don't have any configuration files. It is so simple, right?
 
 There are more examples on tutorial section.
 
