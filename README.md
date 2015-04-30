@@ -84,18 +84,16 @@ public class EasyClient {
 	public static void main(String[] args) {
 		transferObjectFactory = new TransferObjectFactory("127.0.0.1", 10001, 5000);
 		transferObjectFactory.setImplClass("ExampleManagerImpl");
-		manager = (TestManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
+		manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 		
-		int Id = 18;
-		String name = "JimT";
-		String result = manager.sayHello(Id, name);
+		String result = manager.sayHello(18, "JimT");
 		System.out.println("result: "+result);
 	}
 }
 ```
-Of cause, we need have that interface class (ExampleManager.class) and put into classpath. 
+Create TransferObjectFactory object with server ip, port ant timeout, and set implement class name. Create a proxy, make method call. Of cause, client side need have that interface class (ExampleManager.class) and put into classpath. 
 
-That is everything from server to client codes and configuration for a full RPC. It is so simple, right?
+That is everything from server to client codes for a full RPC. Don't have any configuration files. It is so simple, right?
 
 There are more examples on tutorial section.
 
