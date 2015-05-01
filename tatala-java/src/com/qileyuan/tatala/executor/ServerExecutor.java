@@ -6,7 +6,7 @@ import com.qileyuan.tatala.socket.to.TransferObject;
 /**
  * This class is the distribution-method-call executor, which dispatches request to socket controller.
  * 
- * @author JimT
+ * @author Jim Tang
  *
  */
 public class ServerExecutor{
