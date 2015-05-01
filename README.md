@@ -13,7 +13,7 @@
 * More easy understand example code
 * Support protobuf
 
-## Version 0.1.2 Release Note (go to history folder)
+## Version 0.1.2 Release Note (see history folder)
 * Add set on EasyClient
 * Add TatalaReturnException, so let client be able to rollback transaction
 * fix bugs for List and Map on ServerProxy.java
@@ -132,7 +132,7 @@ Supported parameter and return type table
 ## Other Notes
 Require JDK1.7, because using Java AIO.
 
-Third part libs include XSteam and Log4j.
+Third part libs include Protobuf and Log4j.
 ## License
 This library is distributed under Apache License Version 2.0
 ## Contact
