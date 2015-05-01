@@ -18,7 +18,7 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * This class is transfer object class.
  * It converts java primitive type data and user-defined object into byte array and vice versa. 
  * 
- * @author JimT
+ * @author Jim Tang
  *
  */
 public abstract class TransferObject {

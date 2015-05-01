@@ -6,7 +6,6 @@ import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.example.service.model.wrapper.AllTypeBeanWrapper;
 import com.qileyuan.tatala.proxy.DefaultProxy;
-import com.qileyuan.tatala.socket.to.OrderedTransferObject;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -18,8 +17,7 @@ import com.qileyuan.tatala.socket.to.TransferObject;
 public class ExampleDefaultProxy extends DefaultProxy{
 	private ExampleManager manager = new ExampleManagerImpl();
 	
-	public Object execute(TransferObject abstractto){
-		OrderedTransferObject to = (OrderedTransferObject)abstractto;
+	public Object execute(TransferObject to){
 		String calleeMethod = to.getCalleeMethod();
 		
 		if(calleeMethod.equals("sayHello")){
