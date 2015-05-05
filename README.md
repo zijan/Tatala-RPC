@@ -63,6 +63,7 @@ public class ExampleManagerImpl implements ExampleManager{
 }
 ```
 We need to create a socket server class, in order to deploy our server logic on server side. In this sample, socket server listener port is 10001.
+
 ExampleServer.java
 ```java
 public class ExampleServer {
@@ -75,6 +76,7 @@ public class ExampleServer {
 }
 ```
 Then client side code is something like:
+
 EasyClient.java
 ```java
 public class EasyClient {
