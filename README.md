@@ -38,6 +38,7 @@ https://github.com/zijan/Tatala/wiki/Tatala-中文教程
 * Support Server push message to client
 * Support Server return runtime exception to clien side, so client be able to rollback transaction
 * Support Google Protocol Buffers as object serializing solution
+* Filter control, we can add filters on server side, preprocess input byte array before call server code
 * Can use for cross-language RPC, high performance cache server, distributed message service, MMO game server……
 
 ## Get Started
@@ -63,6 +64,7 @@ public class ExampleManagerImpl implements ExampleManager{
 }
 ```
 We need to create a socket server class, in order to deploy our server logic on server side. In this sample, socket server listener port is 10001.
+
 ExampleServer.java
 ```java
 public class ExampleServer {
@@ -75,6 +77,7 @@ public class ExampleServer {
 }
 ```
 Then client side code is something like:
+
 EasyClient.java
 ```java
 public class EasyClient {
