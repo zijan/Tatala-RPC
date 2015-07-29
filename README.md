@@ -1,24 +1,5 @@
 # Tatala RPC
 
-## Version 0.2.0 Release Note
-* Code refactor
-* Change ServerExecutor with socket only
-* Take away retry times
-* Remove short connection
-* Add package for exception
-* Remove any property file (controller.xml & tatala.properties)
-* Change the way of default proxy call
-* Change MappedTransferObject and OrderedTransferObject
-* Fix when clien close, Receive error show up on server side
-* More easy understand example code
-* Support protobuf
-
-## Version 0.1.2 Release Note (see history folder)
-* Add set on EasyClient
-* Add TatalaReturnException, so let client be able to rollback transaction
-* fix bugs for List and Map on ServerProxy.java
-* fix for multiple thread, void return method, may disorder on server side
-
 ## Overview
 Tatala is an easy-to-use RPC middleware, cross language and cross platform, that convert method signature (include callee class name, target method name, the number of its arguments and server return) into byte array, communicate with client and server base on socket.
 
@@ -38,6 +19,7 @@ https://github.com/zijan/Tatala/wiki/Tatala-中文教程
 * Support Server push message to client
 * Support Server return runtime exception to clien side, so client be able to rollback transaction
 * Support Google Protocol Buffers as object serializing solution
+* Filter control, we can add filters on server side, preprocess input byte array before call server code
 * Can use for cross-language RPC, high performance cache server, distributed message service, MMO game server……
 
 ## Get Started
@@ -63,6 +45,7 @@ public class ExampleManagerImpl implements ExampleManager{
 }
 ```
 We need to create a socket server class, in order to deploy our server logic on server side. In this sample, socket server listener port is 10001.
+
 ExampleServer.java
 ```java
 public class ExampleServer {
@@ -75,6 +58,7 @@ public class ExampleServer {
 }
 ```
 Then client side code is something like:
+
 EasyClient.java
 ```java
 public class EasyClient {
