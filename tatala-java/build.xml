@@ -1,9 +1,10 @@
 <project default="all">
 	<property name="module-name" value="tatala" />
-	<property name="obj-dir" location="bin" />
+  <property name="module-version" value="0.2.1" />
+	<property name="obj-dir" location="target/classes" />
 	<property name="lib-dir" location="lib" />
 	<property name="src-dir" location="src" />
-	<property name="dist-dir" location="dist" />
+	<property name="target-dir" location="target" />
 	<property name="example-dir" location="../tatala-java-example/lib" />
 
 	<target name="clean">
@@ -23,8 +24,8 @@
 	</target>
 
 	<target name="jar" depends="compile">
-		<jar destfile="${dist-dir}/${module-name}.jar" basedir="${obj-dir}" />
-		<copy file="${dist-dir}/${module-name}.jar" todir="${example-dir}" />
+		<jar destfile="${target-dir}/${module-name}-${module-version}.jar" basedir="${obj-dir}" />
+		<copy file="${target-dir}/${module-name}-${module-version}.jar" todir="${example-dir}" />
 	</target>
 
 	<target name="all" depends="jar" />
