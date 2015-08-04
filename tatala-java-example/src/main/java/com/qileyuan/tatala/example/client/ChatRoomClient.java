@@ -29,13 +29,13 @@ public class ChatRoomClient {
 		try {
 			room.init();
 			room.login();
-			System.out.println("©°-- enter room --©´");
+			System.out.println("^-- enter room --^");
 
 			while(room.sent()){
 				room.display();
 			}
 			
-			System.out.println("©¸-- exit room --©¼");
+			System.out.println("v-- exit room --v");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

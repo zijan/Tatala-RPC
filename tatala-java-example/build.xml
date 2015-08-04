@@ -1,9 +1,10 @@
 <project default="all">
 	<property name="module-name" value="tatala-java-example" />
-	<property name="obj-dir" location="bin" />
+  <property name="module-version" value="0.2.1" />
+	<property name="obj-dir" location="target/classes" />
 	<property name="lib-dir" location="lib" />
 	<property name="src-dir" location="src" />
-	<property name="dist-dir" location="dist" />
+	<property name="target-dir" location="target" />
 
 	<target name="clean">
 		<delete dir="${obj-dir}" />
@@ -19,10 +20,11 @@
 				</fileset>
 			</classpath>
 		</javac>
+    <copy file="${src-dir}/main/resources/log4j.xml" todir="${obj-dir}" />
 	</target>
 
 	<target name="jar" depends="compile">
-		<jar destfile="${dist-dir}/${module-name}.jar" basedir="${obj-dir}" />
+		<jar destfile="${target-dir}/${module-name}-${module-version}.jar" basedir="${obj-dir}" />
 	</target>
 
 	<target name="all" depends="jar" />
