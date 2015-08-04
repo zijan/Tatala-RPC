@@ -9,6 +9,7 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
+import com.qileyuan.tatala.example.proxy.ExampleClientProxy;
 import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountListWrapper;
 import com.qileyuan.tatala.example.service.model.wrapper.AccountMapWrapper;
@@ -36,6 +37,7 @@ public class ExampleClient {
 		client.compressTest();
 		client.asynchronousTest();
 		client.defaultProxyTest();
+		client.protobufTest();
 		client.returnExceptionTest();
 	}
 	
@@ -223,6 +225,17 @@ public class ExampleClient {
 		to.putSerializable(account);
 
 		Account returnAccount = (Account) ServerExecutor.execute(to);
+
+		log.debug(returnAccount);
+	}
+	
+	public void protobufTest() throws Exception {
+		Account account = new Account();
+		account.setId(1000);
+		account.setName("...Protobuf Test...");
+		
+		ExampleClientProxy proxy = new ExampleClientProxy();
+		Account returnAccount = proxy.getAccountProto(account);
 
 		log.debug(returnAccount);
 	}
