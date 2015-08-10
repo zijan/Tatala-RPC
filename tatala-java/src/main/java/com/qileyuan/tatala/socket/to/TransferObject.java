@@ -40,17 +40,15 @@ public abstract class TransferObject {
 	public static final byte DATATYPE_DOUBLE = 9;
 	public static final byte DATATYPE_DATE = 10;
 	public static final byte DATATYPE_STRING = 11;
-	
 	public static final byte DATATYPE_WRAPPER = 12;
-	
 	public static final byte DATATYPE_BYTEARRAY = 13;
 	public static final byte DATATYPE_INTARRAY = 14;
 	public static final byte DATATYPE_LONGARRAY = 15;
 	public static final byte DATATYPE_FLOATARRAY = 16;
 	public static final byte DATATYPE_DOUBLEARRAY = 17;
 	public static final byte DATATYPE_STRINGARRAY = 18;
-	
 	public static final byte DATATYPE_SERIALIZABLE = 19;
+	public static final byte DATATYPE_NORETURN = 20;
 	
 	public static final String DEFAULT_PROXY = "DefaultProxy";
 	public static final String DEFAULT_METHOD = "execute";

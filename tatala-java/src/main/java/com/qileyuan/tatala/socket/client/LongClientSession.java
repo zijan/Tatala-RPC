@@ -125,6 +125,11 @@ public class LongClientSession{
 	private Object receive(TransferObject to) throws InterruptedException, DataFormatException, SocketExecuteException  {
 		Object resultObject = null;
 
+		//if noreturn type, don't call socket receive
+		if(to.getReturnType() == TransferObject.DATATYPE_NORETURN){
+			return resultObject;
+		}
+		
 		//if receiveQueue is empty, wait a while, until server response come 
 		byte[] receiveData = receiveQueue.poll(timeout, TimeUnit.MILLISECONDS);
 

@@ -250,6 +250,11 @@ public class ServerSession {
 	}
 
 	private void send(TransferObject to, Object returnObj) throws IOException, InterruptedException, ExecutionException{
+		//if noreturn type, don't call socket send
+		if(to.getReturnType() == TransferObject.DATATYPE_NORETURN){
+			return;
+		}
+		
 		byte[] sendData = TransferUtil.returnObjectToByteArray(to, returnObj);
 		ByteBuffer byteBuffer = ByteBuffer.wrap(sendData);
 		

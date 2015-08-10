@@ -38,7 +38,12 @@ public class ExampleClient {
 		client.asynchronousTest();
 		client.defaultProxyTest();
 		client.protobufTest();
-		client.returnExceptionTest();
+		try {
+			client.returnExceptionTest();
+		} catch (Exception e) {
+			log.error("Return Exception Test: " + e.getMessage());
+		}
+		client.noreturnTest();
 	}
 	
 	public void normalTest(){
@@ -247,6 +252,16 @@ public class ExampleClient {
 		to.putInt(-1);
 		to.registerReturnType(TransferObject.DATATYPE_VOID);
 
+		ServerExecutor.execute(to);
+	}
+	
+	public void noreturnTest() {
+		TransferObject to = transferObjectFactory.createTransferObject();
+		to.setCalleeClass("com.qileyuan.tatala.example.proxy.ExampleServerProxy");
+		to.setCalleeMethod("sayHello");
+		to.putInt(0);
+		to.putString("Jim");
+		to.registerReturnType(TransferObject.DATATYPE_NORETURN);
 		ServerExecutor.execute(to);
 	}
 }
