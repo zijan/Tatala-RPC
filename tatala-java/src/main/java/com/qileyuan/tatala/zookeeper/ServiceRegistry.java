@@ -14,6 +14,7 @@ public class ServiceRegistry {
     private static final Logger log = Logger.getLogger(ServiceRegistry.class);
     
     public static final String ZK_REGISTRY_PATH = "/registry";
+    public static final String ZK_SERVER_PATH = ZK_REGISTRY_PATH + "/server";
 
     private CountDownLatch latch = new CountDownLatch(1);
 
@@ -52,7 +53,7 @@ public class ServiceRegistry {
     private void createNode(ZooKeeper zk, String address) {
         try {
             byte[] bytes = address.getBytes();
-            String path = zk.create(ZK_REGISTRY_PATH, bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+            String path = zk.create(ZK_SERVER_PATH, bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
             log.info("Create zookeeper node ("+path+" => "+address+")");
         } catch (Exception e) {
         	log.error("ZooKeeper.createNode:", e);

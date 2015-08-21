@@ -63,7 +63,7 @@ public class AioSocketServer {
 		try {
 			if(zkRegistryAddress != null){
 				ServiceRegistry serviceRegistry = new ServiceRegistry(zkRegistryAddress);
-				serviceRegistry.register(serverSocketChannel.getLocalAddress().toString());
+				serviceRegistry.register(((InetSocketAddress)serverSocketChannel.getLocalAddress()).toString());
 			}
 		} catch (IOException e) {
 			log.error("registerZooKeeper error: ", e);

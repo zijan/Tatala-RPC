@@ -35,7 +35,7 @@ public class ClusterServer {
 		log.info("*** Example Tatala Server ***");
 		int listenPort = 10001;
 		int poolSize = 16;
-		zkRegistryAddress = "1127.0.0.1:2181";
+		zkRegistryAddress = "127.0.0.1:2181";
 		if(args != null && args.length > 1){
 			listenPort = Integer.parseInt(args[0]);
 			poolSize = Integer.parseInt(args[1]);
