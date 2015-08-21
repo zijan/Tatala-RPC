@@ -30,6 +30,11 @@ public class EasyClient {
 		manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 	}
 
+	public EasyClient(TransferObjectFactory transferObjectFactory) {
+		this.transferObjectFactory = transferObjectFactory;
+		manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
+	}
+	
 	public static void main(String[] args) {
 		
 		EasyClient easyClient = new EasyClient();

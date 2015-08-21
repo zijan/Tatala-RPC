@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.proxy.DefaultProxy;
+import com.qileyuan.tatala.zookeeper.ServiceRegistry;
 
 public class AioSocketServer {
 	static Logger log = Logger.getLogger(AioSocketServer.class);
@@ -25,6 +26,8 @@ public class AioSocketServer {
 	private DefaultProxy defaultProxy;
 	private static Map<Long, ServerSession> sessionMap = Collections.synchronizedMap(new HashMap<Long, ServerSession>());
 	private List<SessionFilter> sessionFilterList = new ArrayList<SessionFilter>();
+	
+	private String zkRegistryAddress;
 
 	public AioSocketServer(int listenPort, int poolSize) {
 		this.listenPort = listenPort;
@@ -50,15 +53,27 @@ public class AioSocketServer {
 			serverSocketChannel = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(new InetSocketAddress(listenPort));
 			serverSocketChannel.setOption(StandardSocketOptions.SO_REUSEADDR, true);
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.error("setUpHandlers error: ", e);
 		}
 		log.info("** " + poolSize + " handler thread has been setup! **");
 		log.info("** Socket Server has been startup, listen port is " + listenPort + "! **");
 	}
 
+	public void registerZooKeeper(){
+		try {
+			if(zkRegistryAddress != null){
+				ServiceRegistry serviceRegistry = new ServiceRegistry(zkRegistryAddress);
+				serviceRegistry.register(serverSocketChannel.getLocalAddress().toString());
+			}
+		} catch (IOException e) {
+			log.error("registerZooKeeper error: ", e);
+		}
+	}
+	
 	public void start() {
 		setUpHandlers();
 		acceptConnections();
+		registerZooKeeper();
 	}
 
 	public void registerProxy(DefaultProxy defaultProxy) {
@@ -73,4 +88,7 @@ public class AioSocketServer {
 		return sessionMap;
 	}
 	
+	public void setZKRegistryAddress(String zkRegistryAddress){
+		this.zkRegistryAddress = zkRegistryAddress;
+	}
 }
