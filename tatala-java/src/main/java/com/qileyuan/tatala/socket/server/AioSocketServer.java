@@ -1,6 +1,7 @@
 package com.qileyuan.tatala.socket.server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.StandardSocketOptions;
 import java.nio.channels.AsynchronousChannelGroup;
@@ -63,7 +64,8 @@ public class AioSocketServer {
 		try {
 			if(zkRegistryAddress != null){
 				ServiceRegistry serviceRegistry = new ServiceRegistry(zkRegistryAddress);
-				serviceRegistry.register(((InetSocketAddress)serverSocketChannel.getLocalAddress()).toString());
+				//serviceRegistry.register(((InetSocketAddress)serverSocketChannel.getLocalAddress()).toString());
+				serviceRegistry.register(InetAddress.getLocalHost().getHostAddress()+":"+listenPort);
 			}
 		} catch (IOException e) {
 			log.error("registerZooKeeper error: ", e);

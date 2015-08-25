@@ -10,7 +10,7 @@ public class ClusterClient {
 	static Logger log = Logger.getLogger(ClusterClient.class);
 
 	public static void main(String[] args) {
-		String zkRegistryAddress = "1127.0.0.1:2181";
+		String zkRegistryAddress = "127.0.0.1:2181";
 		if(args != null && args.length > 0){
 			zkRegistryAddress = args[0];
 		}

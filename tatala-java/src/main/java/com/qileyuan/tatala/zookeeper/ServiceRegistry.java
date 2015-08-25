@@ -8,6 +8,7 @@ import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.data.Stat;
 
 public class ServiceRegistry {
 
@@ -53,6 +54,10 @@ public class ServiceRegistry {
     private void createNode(ZooKeeper zk, String address) {
         try {
             byte[] bytes = address.getBytes();
+            Stat stat = zk.exists(ZK_REGISTRY_PATH, false);
+            if(stat == null){
+            	zk.create(ZK_REGISTRY_PATH, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+            }
             String path = zk.create(ZK_SERVER_PATH, bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
             log.info("Create zookeeper node ("+path+" => "+address+")");
         } catch (Exception e) {
