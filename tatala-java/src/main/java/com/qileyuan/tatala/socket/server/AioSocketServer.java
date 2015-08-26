@@ -3,6 +3,7 @@ package com.qileyuan.tatala.socket.server;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.NetworkInterface;
 import java.net.StandardSocketOptions;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
@@ -29,11 +30,17 @@ public class AioSocketServer {
 	private List<SessionFilter> sessionFilterList = new ArrayList<SessionFilter>();
 	
 	private String zkRegistryAddress;
+	private String listenIP;
 
 	public AioSocketServer(int listenPort, int poolSize) {
 		this.listenPort = listenPort;
 		this.poolSize = poolSize;
 		this.defaultProxy = new DefaultProxy();
+	}
+	
+	public AioSocketServer(String listenIP, int listenPort, int poolSize) {
+		this(listenPort, poolSize);
+		this.listenIP = listenIP;
 	}
 
 	public void acceptConnections() {
@@ -64,8 +71,12 @@ public class AioSocketServer {
 		try {
 			if(zkRegistryAddress != null){
 				ServiceRegistry serviceRegistry = new ServiceRegistry(zkRegistryAddress);
-				//serviceRegistry.register(((InetSocketAddress)serverSocketChannel.getLocalAddress()).toString());
-				serviceRegistry.register(InetAddress.getLocalHost().getHostAddress()+":"+listenPort);
+				if(listenIP != null){
+					serviceRegistry.register(listenIP+":"+listenPort);
+				}else{
+					NetworkInterface.getNetworkInterfaces();
+					serviceRegistry.register(InetAddress.getLocalHost().getHostAddress()+":"+listenPort);
+				}
 			}
 		} catch (IOException e) {
 			log.error("registerZooKeeper error: ", e);

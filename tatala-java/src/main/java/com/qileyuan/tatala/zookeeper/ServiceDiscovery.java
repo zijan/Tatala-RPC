@@ -38,7 +38,7 @@ public class ServiceDiscovery {
 				log.debug("using only data:" + data);
 			} else {
 				data = dataList.get(ThreadLocalRandom.current().nextInt(size));
-				log.debug("using random data::" + data);
+				log.debug("using random data:" + data);
 			}
 		}
 		return data;

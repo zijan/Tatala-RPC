@@ -59,7 +59,7 @@ public class ServiceRegistry {
             	zk.create(ZK_REGISTRY_PATH, null, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
             }
             String path = zk.create(ZK_SERVER_PATH, bytes, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-            log.info("Create zookeeper node ("+path+" => "+address+")");
+            log.info("Create zookeeper node [" + path + "] " + address);
         } catch (Exception e) {
         	log.error("ZooKeeper.createNode:", e);
         }

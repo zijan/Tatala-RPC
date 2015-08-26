@@ -24,6 +24,10 @@ public class TransferObjectFactory {
 		this.connection = new SocketConnection(ip, port, timeout);
 	}
 	
+	public TransferObjectFactory(String zkRegistryAddress, int timeout) {
+		this.connection = new SocketConnection(zkRegistryAddress, timeout);
+	}
+	
 	public void registerServerCallProxy(DefaultProxy serverCallProxy){
 		this.serverCallProxy = serverCallProxy;
 	}

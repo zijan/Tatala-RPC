@@ -9,21 +9,23 @@ import com.qileyuan.tatala.socket.server.AioSocketServer;
 public class ClusterServer {
 	static Logger log = Logger.getLogger(ClusterServer.class);
 	
+	private static String listenAddress;
 	private static String zkRegistryAddress;
 	
 	public static void initialize(){
 		log.info("Cluster Tatala Server initialize...");
 	}
 	
-	public static void startup(int listenPort, int poolSize){
+	public static void startup(String listenIP, int listenPort, int poolSize){
 		log.info("Cluster Tatala Server starting...");
 		
-		AioSocketServer server = new AioSocketServer(listenPort, poolSize);
+		AioSocketServer server = new AioSocketServer(listenIP, listenPort, poolSize);
 		
 		try {
 			//set default proxy or callee class here
 			DefaultProxy defaultProxy = new ExampleDefaultProxy();
 			server.registerProxy(defaultProxy);
+			//set zookeeper address, as load balancer
 			server.setZKRegistryAddress(zkRegistryAddress);
 			server.start();
 		} catch (Exception e) {
@@ -32,17 +34,17 @@ public class ClusterServer {
 	}
 	
 	public static void main(String args[]) {
-		log.info("*** Example Tatala Server ***");
-		int listenPort = 10001;
+		log.info("*** Cluster Tatala Server ***");
+		listenAddress = "127.0.0.1:10001";
 		int poolSize = 16;
 		zkRegistryAddress = "127.0.0.1:2181";
 		if(args != null && args.length > 1){
-			listenPort = Integer.parseInt(args[0]);
+			listenAddress = args[0];
 			poolSize = Integer.parseInt(args[1]);
 			zkRegistryAddress = args[2];
 		}
 		 
 		initialize();
-		startup(listenPort, poolSize);
+		startup(listenAddress.split(":")[0], Integer.parseInt(listenAddress.split(":")[1]), poolSize);
 	}
 }
