@@ -103,7 +103,6 @@ public class LongClientSession{
 				socketChannel.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
 				socketChannel.connect(new InetSocketAddress(ip, port)).get(timeout, TimeUnit.MILLISECONDS);
 				closed = false;
-				log.debug("Session start to " + socketChannel.getRemoteAddress());
 				
 				//when connect to the server, keep receiving data either server response or server call
 				receive();
@@ -269,5 +268,13 @@ public class LongClientSession{
 	
 	public ByteBuffer getByteBuffer() {
 		return byteBuffer;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public int getPort() {
+		return port;
 	}
 }

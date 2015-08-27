@@ -7,6 +7,7 @@ import java.util.concurrent.ThreadFactory;
 
 import org.apache.log4j.Logger;
 
+import com.qileyuan.tatala.socket.exception.SocketExecuteException;
 import com.qileyuan.tatala.socket.to.TransferObject;
 
 /**
@@ -44,7 +45,12 @@ public class SocketController {
 			Worker worker = new Worker(connection, to);
 			return executorService.submit(worker);
 		} else {
-			return connection.execute(to);
+			try {
+				return connection.execute(to);
+			} catch (SocketExecuteException e) {
+				log.error("SocketController.execute: ", e);
+			}
+			return null;
 		}
 	}
 	
@@ -62,7 +68,7 @@ public class SocketController {
 			return execute();
 		}
 
-		private Object execute() {
+		private Object execute() throws SocketExecuteException {
 			return connection.execute(to);
 		}
 	}

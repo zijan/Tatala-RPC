@@ -12,39 +12,33 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 public class ServiceDiscovery {
-	private static final Logger log = Logger.getLogger(ServiceRegistry.class);
+	private static final Logger log = Logger.getLogger(ServiceDiscovery.class);
 
-	private CountDownLatch latch = new CountDownLatch(1);
+	private static CountDownLatch latch = new CountDownLatch(1);
 
-	private volatile List<String> dataList = new ArrayList<String>();
+	private static List<String> dataList = new ArrayList<String>();
 
-	private String registryAddress;
-
-	public ServiceDiscovery(String registryAddress) {
-		this.registryAddress = registryAddress;
-
-		ZooKeeper zk = connectServer();
+	public static void init(String registryAddress){
+		ZooKeeper zk = connectServer(registryAddress);
 		if (zk != null) {
 			watchNode(zk);
 		}
 	}
-
-	public String discover() {
+	
+	public static String discover() {
 		String data = null;
 		int size = dataList.size();
 		if (size > 0) {
 			if (size == 1) {
 				data = dataList.get(0);
-				log.debug("using only data:" + data);
 			} else {
 				data = dataList.get(ThreadLocalRandom.current().nextInt(size));
-				log.debug("using random data:" + data);
 			}
 		}
 		return data;
 	}
 
-	private ZooKeeper connectServer() {
+	private static ZooKeeper connectServer(String registryAddress) {
 		ZooKeeper zk = null;
 		try {
 			zk = new ZooKeeper(registryAddress, 5000, new Watcher() {
@@ -62,7 +56,7 @@ public class ServiceDiscovery {
 		return zk;
 	}
 
-	private void watchNode(final ZooKeeper zk) {
+	private static void watchNode(final ZooKeeper zk) {
 		try {
 			List<String> nodeList = zk.getChildren(ServiceRegistry.ZK_REGISTRY_PATH, new Watcher() {
 				@Override
@@ -77,8 +71,7 @@ public class ServiceDiscovery {
 				byte[] bytes = zk.getData(ServiceRegistry.ZK_REGISTRY_PATH + "/" + node, false, null);
 				dataList.add(new String(bytes));
 			}
-			log.debug("node data: " + dataList);
-			this.dataList = dataList;
+			ServiceDiscovery.dataList = dataList;
 		} catch (Exception e) {
 			log.error("ServiceDiscovery.watchNode: ", e);
 		}

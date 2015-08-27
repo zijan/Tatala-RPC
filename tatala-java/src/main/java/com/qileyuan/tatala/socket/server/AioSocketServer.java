@@ -60,11 +60,12 @@ public class AioSocketServer {
 			AsynchronousChannelGroup asyncChannelGroup = AsynchronousChannelGroup.withFixedThreadPool(poolSize, Executors.defaultThreadFactory());
 			serverSocketChannel = AsynchronousServerSocketChannel.open(asyncChannelGroup).bind(new InetSocketAddress(listenPort));
 			serverSocketChannel.setOption(StandardSocketOptions.SO_REUSEADDR, true);
+			
+			log.info("** " + poolSize + " handler thread has been setup! **");
+			log.info("** Socket Server has been startup, listen port is " + listenPort + "! **");
 		} catch (IOException e) {
 			log.error("setUpHandlers error: ", e);
 		}
-		log.info("** " + poolSize + " handler thread has been setup! **");
-		log.info("** Socket Server has been startup, listen port is " + listenPort + "! **");
 	}
 
 	public void registerZooKeeper(){
