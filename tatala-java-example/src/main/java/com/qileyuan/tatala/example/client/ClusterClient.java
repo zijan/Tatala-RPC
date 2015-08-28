@@ -53,7 +53,7 @@ public class ClusterClient {
 	private static void multipleServerCall(String[] args){
 		log.debug("multipleServerCall------------");
 		
-		String zkRegistryAddress = "127.0.0.2:2181";
+		String zkRegistryAddress = "127.0.0.1:2181";
 		if(args != null && args.length > 0){
 			zkRegistryAddress = args[0];
 		}

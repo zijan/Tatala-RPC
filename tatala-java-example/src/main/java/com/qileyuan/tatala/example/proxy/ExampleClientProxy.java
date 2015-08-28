@@ -34,15 +34,13 @@ import com.qileyuan.tatala.socket.to.TransferObjectFactory;
  */
 public class ExampleClientProxy {
 
-	private String IP = "127.0.0.1";
-	private int PORT = 10001;
-	private int TIMEOUT = 5000;
-	
 	private TransferObjectFactory transferObjectFactory;
 
 	public ExampleClientProxy(){
 		//create long connection factory
-		transferObjectFactory = new TransferObjectFactory(IP, PORT, TIMEOUT);
+		transferObjectFactory = new TransferObjectFactory("127.0.0.1", 10001, 5000);
+		//zookeeper registry server
+		//transferObjectFactory = new TransferObjectFactory("127.0.0.1:2181", 5000);
 	}
 	
 	public String sayHello(int Id, String name) {

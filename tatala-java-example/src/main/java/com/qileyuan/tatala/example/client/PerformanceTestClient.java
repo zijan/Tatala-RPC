@@ -17,7 +17,7 @@ import com.qileyuan.tatala.example.service.model.AllTypeBean;
 public class PerformanceTestClient implements Runnable{
 
 	static int numThread = 100;
-	static int times = 100;
+	static int times = 1000;
 
 	static Logger log = Logger.getLogger(PerformanceTestClient.class);
 	static ExampleClientProxy proxy = new ExampleClientProxy();

@@ -25,7 +25,7 @@ public class ExampleManagerImpl implements ExampleManager{
 	Logger log = Logger.getLogger(ExampleManagerImpl.class);
 	
 	public String sayHello(int Id, String name) {
-		log.debug("["+Id+"]"+"Hello "+name+" !");
+		//log.debug("["+Id+"]"+"Hello "+name+" !");
 		return "["+Id+"]"+"Hello "+name+" !";
 	}
 
