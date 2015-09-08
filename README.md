@@ -16,7 +16,7 @@ https://github.com/zijan/Tatala/wiki/Tatala-中文教程
 * Multi thread on both client and server side
 * Support synchronous or asynchronous method call
 * Compression for big content
-* Support clinet oneway call and server push call
+* Support clinet one-way call and server push call
 * Server return runtime exception to clien side, so client be able to rollback transaction
 * Google Protocol Buffers as object serializing solution
 * Filter control, we can add filters on server side, preprocess input byte array before call server code
