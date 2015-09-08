@@ -12,14 +12,15 @@ https://github.com/zijan/Tatala/wiki/Tatala-中文教程
 * Cross language and platform
 * High performance and distributed
 * Binary communication protocol
-* Support long socket connection
-* Support multi thread on both client and server side
+* Long lived persistent connection
+* Multi thread on both client and server side
 * Support synchronous or asynchronous method call
-* Support compression for big content
-* Support Server push message to client
-* Support Server return runtime exception to clien side, so client be able to rollback transaction
-* Support Google Protocol Buffers as object serializing solution
+* Compression for big content
+* Support clinet oneway call and server push call
+* Server return runtime exception to clien side, so client be able to rollback transaction
+* Google Protocol Buffers as object serializing solution
 * Filter control, we can add filters on server side, preprocess input byte array before call server code
+* Use zookeeper as a service registry, load balance and failover
 * Can use for cross-language RPC, high performance cache server, distributed message service, MMO game server……
 
 ## Get Started
