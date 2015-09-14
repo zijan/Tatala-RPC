@@ -76,7 +76,7 @@ public class EasyClient {
 	}
 }
 ```
-Create TransferObjectFactory object with server ip, port ant timeout, and set implement class name. Create a proxy, make method call. Of cause, client side need have that interface class (ExampleManager.class) in classpath. 
+Create TransferObjectFactory object with server ip, port ant timeout, and set implement class. Create a proxy, make method call. Of cause, client side need have that interface class (ExampleManager.class) in classpath. 
 
 That is everything from server to client. Don't have any configuration files. It is so simple, right?
 
