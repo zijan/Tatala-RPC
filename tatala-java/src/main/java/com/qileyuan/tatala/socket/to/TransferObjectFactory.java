@@ -36,12 +36,20 @@ public class TransferObjectFactory {
 		this.calleeClass = calleeClass;
 	}
 	
+	public void setCalleeClass(Class<?> calleeClass){
+		this.calleeClass = calleeClass.getName();
+	}
+	
 	public String getImplClass() {
 		return implClass;
 	}
 
 	public void setImplClass(String implClass) {
 		this.implClass = implClass;
+	}
+	
+	public void setImplClass(Class<?> implClass) {
+		this.implClass = implClass.getName();
 	}
 
 	public boolean isCompress() {

@@ -11,6 +11,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.service.ExampleManager;
+import com.qileyuan.tatala.example.service.ExampleManagerImpl;
 import com.qileyuan.tatala.example.service.model.Account;
 import com.qileyuan.tatala.example.service.model.AllTypeBean;
 import com.qileyuan.tatala.proxy.ClientProxyFactory;
@@ -25,7 +26,7 @@ public class EasyClient {
 	
 	public EasyClient() {
 		transferObjectFactory = new TransferObjectFactory("127.0.0.1", 10001, 5000);
-		transferObjectFactory.setImplClass("com.qileyuan.tatala.example.service.ExampleManagerImpl");
+		transferObjectFactory.setImplClass(ExampleManagerImpl.class);
 		transferObjectFactory.setCompress(true);
 		manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 	}

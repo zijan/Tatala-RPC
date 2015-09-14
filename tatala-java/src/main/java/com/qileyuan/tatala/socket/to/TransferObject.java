@@ -82,6 +82,10 @@ public abstract class TransferObject {
 	public void setCalleeClass(String calleeClass) {
 		this.calleeClass = calleeClass;
 	}
+	
+	public void setCalleeClass(Class<?> calleeClass) {
+		this.calleeClass = calleeClass.getName();
+	}
 
 	public String getCalleeMethod() {
 		return calleeMethod;

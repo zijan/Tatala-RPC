@@ -1,6 +1,6 @@
 <project default="all">
 	<property name="module-name" value="tatala" />
-  <property name="module-version" value="0.2.1" />
+  <property name="module-version" value="0.3.0" />
 	<property name="obj-dir" location="target/classes" />
 	<property name="lib-dir" location="lib" />
 	<property name="src-dir" location="src" />

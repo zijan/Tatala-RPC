@@ -4,7 +4,7 @@
 
   <groupId>com.qileyuan</groupId>
   <artifactId>tatala</artifactId>
-  <version>0.2.1</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
   
   <name>Tatala RPC</name>

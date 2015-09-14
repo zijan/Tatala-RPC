@@ -3,6 +3,7 @@ package com.qileyuan.tatala.example.client;
 import org.apache.log4j.Logger;
 
 import com.qileyuan.tatala.example.service.ExampleManager;
+import com.qileyuan.tatala.example.service.ExampleManagerImpl;
 import com.qileyuan.tatala.proxy.ClientProxyFactory;
 import com.qileyuan.tatala.socket.to.TransferObjectFactory;
 import com.qileyuan.tatala.zookeeper.ServiceDiscovery;
@@ -33,7 +34,7 @@ public class ClusterClient {
         int port = Integer.parseInt(serverAddress.split(":")[1]);
          
 		TransferObjectFactory transferObjectFactory = new TransferObjectFactory(host, port, 5000);
-		transferObjectFactory.setImplClass("com.qileyuan.tatala.example.service.ExampleManagerImpl");
+		transferObjectFactory.setImplClass(ExampleManagerImpl.class);
 		transferObjectFactory.setCompress(true);
 		ExampleManager manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 		
@@ -59,7 +60,7 @@ public class ClusterClient {
 		}
 		
 		TransferObjectFactory transferObjectFactory = new TransferObjectFactory(zkRegistryAddress, 5000);
-		transferObjectFactory.setImplClass("com.qileyuan.tatala.example.service.ExampleManagerImpl");
+		transferObjectFactory.setImplClass(ExampleManagerImpl.class);
 		transferObjectFactory.setCompress(true);
 		ExampleManager manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 		
