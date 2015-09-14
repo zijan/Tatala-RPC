@@ -68,7 +68,7 @@ public class EasyClient {
 	
 	public static void main(String[] args) {
 		transferObjectFactory = new TransferObjectFactory("127.0.0.1", 10001, 5000);
-		transferObjectFactory.setImplClass("ExampleManagerImpl");
+		transferObjectFactory.setImplClass(ExampleManagerImpl.class);
 		manager = (ExampleManager)ClientProxyFactory.create(ExampleManager.class, transferObjectFactory);
 		
 		String result = manager.sayHello(18, "JimT");
