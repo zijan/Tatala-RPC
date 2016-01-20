@@ -121,6 +121,5 @@ Third part libs include Protobuf and Log4j.
 ## License
 This library is distributed under Apache License Version 2.0
 ## Contact
-jimtang@hotmail.ca
 
 QQ: 37287685
