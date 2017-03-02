@@ -22,7 +22,7 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * 
  * <pre>
  * NewTransferObject
- * Client -> Server (remove parameter key)
+ * Client to Server (remove parameter key)
  * 	normal:
  * 	TatalaFlag+(Flag)+( BLength+CLASS+METHOD+ReturnType+CompressFlag+[type+value]+[type+value]+[...] )
  * 	compress:
@@ -33,10 +33,10 @@ import com.qileyuan.tatala.socket.util.TransferUtil;
  * 	
  * 	Flag:
  * 	compress = 1;
- * 	servercall = 1 << 1;
- * 	defaultCallee = 1 << 2;
+ * 	servercall = 1 &lt;&lt; 1;
+ * 	defaultCallee = 1 &lt;&lt; 2;
  * 	
- * 	Server -> Client
+ * 	Server to Client
  * 	normal:
  * 	(Flag)+( BLength+ReturnType+value )
  * 	compress:

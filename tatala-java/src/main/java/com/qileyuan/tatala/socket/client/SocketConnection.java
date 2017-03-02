@@ -42,13 +42,6 @@ public class SocketConnection {
 		ServiceDiscovery.init(zkRegistryAddress);
 	}
 	
-	/**
-	 * This method handles all outgoing and incoming data.
-	 * 
-	 * @param to TransferObject
-	 * @return Object
-	 * @throws SocketExecuteException 
-	 */
 	public Object execute(TransferObject to) throws SocketExecuteException {
 		lock.lock();
 		try {
