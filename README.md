@@ -1,6 +1,6 @@
 # Tatala RPC
 
-Version 0.3.0 <br>
+Version 0.3.0<br>
 Release Note: https://github.com/zijan/Tatala-RPC/wiki
 
 ## Overview
