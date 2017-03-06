@@ -26,10 +26,10 @@
       <artifactId>protobuf-java</artifactId>
       <version>2.6.1</version>
     </dependency>
-    <dependency>
-      <groupId>com.qileyuan</groupId>
-      <artifactId>tatala</artifactId>
-      <version>0.3.0</version>
-    </dependency>
+	<dependency>
+		<groupId>com.github.zijan</groupId>
+		<artifactId>tatala</artifactId>
+		<version>0.3.0</version>
+	</dependency>
   </dependencies>
 </project>
