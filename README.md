@@ -2,14 +2,22 @@
 
 Version 0.3.0<br>
 Release Note: https://github.com/zijan/Tatala-RPC/wiki
-
 ## Overview
 Tatala is an easy-to-use RPC middleware, cross language and cross platform, that convert method signature (include callee class name, target method name, the number of its arguments and server return) into byte array, communicate with client and server base on socket.
 
 Right now, there are Tatala-Java (client & server) and Tatala-client-csharp available.
 
 https://github.com/zijan/Tatala/wiki/Tatala-中文教程
-
+## Download
+https://repo1.maven.org/maven2/com/github/zijan/tatala/
+## Maven
+```xml
+<dependency>
+	<groupId>com.github.zijan</groupId>
+	<artifactId>tatala</artifactId>
+	<version>0.3.0</version>
+</dependency>
+```
 ## Features
 * Easy-to-use quickly develop and setup a network communication component
 * Cross language and platform
