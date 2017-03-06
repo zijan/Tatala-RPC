@@ -1,5 +1,8 @@
 # Tatala RPC
 
+Version 0.3.0<br>
+Release Note: https://github.com/zijan/Tatala-RPC/wiki
+
 ## Overview
 Tatala is an easy-to-use RPC middleware, cross language and cross platform, that convert method signature (include callee class name, target method name, the number of its arguments and server return) into byte array, communicate with client and server base on socket.
 
@@ -121,6 +124,5 @@ Third part libs include Protobuf and Log4j.
 ## License
 This library is distributed under Apache License Version 2.0
 ## Contact
-jimtang@hotmail.ca
 
 QQ: 37287685
